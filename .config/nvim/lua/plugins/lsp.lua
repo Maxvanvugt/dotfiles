@@ -41,7 +41,7 @@ return {
 				"efm",
 				"bashls",
 				"eslint",
-				"tsserver",
+				"ts_ls",
 				"solidity",
 				"tailwindcss",
 				"pyright",
@@ -174,7 +174,7 @@ return {
 			})
 
 			-- typescript
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 				filetypes = {
