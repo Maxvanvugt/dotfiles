@@ -3,5 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 plugins=(git zsh-autocomplete fzf zsh-autosuggestions)
 
+export PATH=/home/max/.local/bin:$PATH
+
 eval "$(oh-my-posh init zsh --config ~/posh-theme.omp.json)"
 source $ZSH/oh-my-zsh.sh
