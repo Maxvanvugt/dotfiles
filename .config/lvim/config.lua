@@ -1,5 +1,4 @@
-vim.opt.number = true
-
+vim.opt.relativenumber = true
 lvim.keys.normal_mode["<TAB>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-TAB>"] = ":BufferLineCyclePrev<CR>"
 
@@ -15,7 +14,11 @@ lvim.builtin.which_key.mappings["c"] = {
   name = "Buffer Close",
   o = { ":BufferLineCloseOthers<cr>", "Close Others" },
   c = { ":BufferKill<cr>", "Close Current" },
+  l = { ":BufferLineCloseLeft<cr>", "Close Left" },
+  r = { ":BufferLineCloseRight<cr>", "Close Right" },
 }
+
+lvim.builtin.telescope.theme = "center"
 
 lvim.plugins = {
   {
