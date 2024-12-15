@@ -1,8 +1,12 @@
 vim.opt.relativenumber = true
+
+lvim.keys.normal_mode["s"] = "<Plug>(leap)"
+lvim.keys.normal_mode["m"] = ":write<CR>"
+
 lvim.keys.normal_mode["<TAB>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-TAB>"] = ":BufferLineCyclePrev<CR>"
 
-lvim.keys.normal_mode["m"] = ":HopWord<CR>"
+-- lvim.transparent_window = true
 
 lvim.builtin.which_key.mappings["f"] = {
   name = "Find",
@@ -22,9 +26,20 @@ lvim.builtin.telescope.theme = "center"
 
 lvim.plugins = {
   {
-    'smoka7/hop.nvim',
-    opts = {
-      keys = 'asdfjkl'
-    }
+    'norcalli/nvim-colorizer.lua'
+  },
+  {
+    'ggandor/leap.nvim'
+  },
+  {
+    'catppuccin/nvim'
   }
 }
+
+vim.cmd [[
+augroup kitty_mp
+    autocmd!
+    au VimLeave * :silent !kitty @ set-spacing padding=20 margin=10
+    au VimEnter * :silent !kitty @ set-spacing padding=0 margin=0
+augroup END
+]]

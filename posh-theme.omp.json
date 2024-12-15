@@ -35,27 +35,6 @@
       "type": "prompt"
     },
     {
-      "alignment": "right",
-      "segments": [
-        {
-          "foreground": "#ffffff",
-          "style": "plain",
-          "template": " \ue641 {{ .CurrentDate | date .Format }} ",
-          "type": "time"
-        },
-        {
-          "foreground": "#ffffff",
-          "properties": {
-            "always_enabled": true
-          },
-          "style": "plain",
-          "template": " \ueba2 {{ .FormattedMs }} ",
-          "type": "executiontime"
-        }
-      ],
-      "type": "prompt"
-    },
-    {
       "alignment": "left",
       "newline": true,
       "segments": [
