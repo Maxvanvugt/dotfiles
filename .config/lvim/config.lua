@@ -11,6 +11,12 @@ lvim.builtin.which_key.mappings["f"] = {
   d = { ":Telescope live_grep<cr>", "Live Grep" },
 }
 
+lvim.builtin.which_key.mappings["c"] = {
+  name = "Buffer Close",
+  o = { ":BufferLineCloseOthers<cr>", "Close Others" },
+  c = { ":BufferKill<cr>", "Close Current" },
+}
+
 lvim.plugins = {
   {
     'smoka7/hop.nvim',
