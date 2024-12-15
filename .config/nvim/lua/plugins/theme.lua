@@ -33,13 +33,6 @@
 
 
 return {
-  "themercorp/themer.lua",
-  lazy = false,
-  config = function()
-    require("themer").setup({
-	  colorscheme = "catppuccin"
-    })
-  end
 }
 -- return {
 --   "nyoom-engineering/oxocarbon.nvim",
