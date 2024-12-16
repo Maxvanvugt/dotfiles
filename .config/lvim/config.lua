@@ -27,8 +27,9 @@ lvim.builtin.which_key.mappings["c"] = {
 lvim.builtin.which_key.mappings["j"] = {
   name = "LSP Saga",
   f = { ":Lspsaga peek_definition<cr>", "Peek Defintion" },
+  d = { ":Lspsaga goto_definition<cr>", "Goto Definition" },
   s = { ":Lspsaga diagnostic_jump_next<cr>", "Diagnostic Jump Next" },
-  d = { ":Lspsaga hover_doc<cr>", "Hover Doc" }
+  a = { ":Lspsaga hover_doc<cr>", "Hover Doc" },
 }
 
 lvim.builtin.which_key.mappings["k"] = {
@@ -49,8 +50,8 @@ lvim.plugins = {
     opts = {},
     -- stylua: ignore
     keys = {
-      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" }
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" }
     },
   },
   {

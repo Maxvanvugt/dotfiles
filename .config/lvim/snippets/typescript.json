@@ -1,0 +1,18 @@
+{
+  "arrow-function": {
+    "prefix": "arrow",
+    "body": [
+      "(${1:params}) => {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Creates an arrow function"
+  },
+  "console-log": {
+    "prefix": "clog",
+    "body": [
+      "console.log(\"${1:key}\", ${2:value});"
+    ],
+    "description": "Creates a console.log with the yanked value"
+  }
+}
