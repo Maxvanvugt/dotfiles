@@ -1,6 +1,7 @@
 vim.opt.relativenumber = true
 
 lvim.keys.normal_mode["m"] = ":write<CR>"
+lvim.keys.normal_mode["S"] = ":HopWordCurrentLine<CR>"
 
 lvim.keys.normal_mode["<TAB>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-TAB>"] = ":BufferLineCyclePrev<CR>"
@@ -39,7 +40,6 @@ lvim.builtin.which_key.mappings["k"] = {
 }
 
 lvim.builtin.telescope.theme = "center"
-
 lvim.plugins = {
   -- Shows color preview for hexdecimal numbers in text
   {
@@ -52,8 +52,7 @@ lvim.plugins = {
     opts = {},
     -- stylua: ignore
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" }
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
     },
   },
   -- Jump to words in text
@@ -78,6 +77,13 @@ lvim.plugins = {
       'nvim-treesitter/nvim-treesitter', -- optional
       'nvim-tree/nvim-web-devicons',     -- optional
     },
+  },
+  {
+    'hadronized/hop.nvim',
+    config = function()
+      require('hop').setup({
+        keys = 'asdfjkl;'
+      })
+    end
   }
-
 }
