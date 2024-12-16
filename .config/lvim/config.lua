@@ -10,7 +10,6 @@ lvim.keys.normal_mode["<S-TAB>"] = ":BufferLineCyclePrev<CR>"
 
 lvim.builtin.which_key.mappings["f"] = {
   name = "Find",
-
   f = { ":Telescope find_files<cr>", "Find Files" },
   d = { ":Telescope live_grep<cr>", "Live Grep" },
   g = { ":Telescope git_status<cr>", "Live Grep" },
