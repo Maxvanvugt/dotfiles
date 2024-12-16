@@ -41,9 +41,11 @@ lvim.builtin.which_key.mappings["k"] = {
 lvim.builtin.telescope.theme = "center"
 
 lvim.plugins = {
+  -- Shows color preview for hexdecimal numbers in text
   {
     'norcalli/nvim-colorizer.lua'
   },
+  -- Jump to words in text
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -54,12 +56,15 @@ lvim.plugins = {
       { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" }
     },
   },
+  -- Jump to words in text
   {
     'ggandor/leap.nvim'
   },
+  -- Catppuccin theme
   {
     'catppuccin/nvim'
   },
+  -- Extends LSP capabilities
   {
     'nvimdev/lspsaga.nvim',
     config = function()
