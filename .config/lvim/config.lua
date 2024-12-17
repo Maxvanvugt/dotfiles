@@ -6,8 +6,6 @@ lvim.keys.normal_mode["S"] = ":HopWordCurrentLine<CR>"
 lvim.keys.normal_mode["<TAB>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-TAB>"] = ":BufferLineCyclePrev<CR>"
 
--- lvim.transparent_window = true
-
 lvim.builtin.which_key.mappings["f"] = {
   name = "Find",
   f = { ":Telescope find_files<cr>", "Find Files" },
@@ -77,6 +75,7 @@ lvim.plugins = {
       'nvim-tree/nvim-web-devicons',     -- optional
     },
   },
+  -- Used for jumping to word in line
   {
     'hadronized/hop.nvim',
     config = function()
@@ -84,5 +83,16 @@ lvim.plugins = {
         keys = 'asdfjkl;'
       })
     end
+  },
+  -- Autoupdates imports on edit
+  {
+    "antosha417/nvim-lsp-file-operations",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-tree.lua",
+    },
+    config = function()
+      require("lsp-file-operations").setup()
+    end,
   }
 }
