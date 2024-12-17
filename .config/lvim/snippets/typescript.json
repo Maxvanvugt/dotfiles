@@ -9,10 +9,50 @@
     "description": "Creates an arrow function"
   },
   "console-log": {
-    "prefix": "clog",
+    "prefix": "cl",
     "body": [
-      "console.log(\"${1:key}\", ${2:value});"
+      "console.log(\"$1\", $2);"
     ],
     "description": "Creates a console.log with the yanked value"
+  },
+  "angular directive": {
+    "prefix": "ndir",
+    "body": [
+      "import { Directive} from \"@angular/core\";",
+      "@Directive({",
+      "\t selector: '$1'",
+      "})",
+      "export class $2 {",
+      "\t$3",
+      "}"
+    ],
+    "description": "Creates a RXJS pipe"
+  },
+  "rxjs-pipe": {
+    "prefix": "rpipe",
+    "body": [
+      ".pipe(",
+      "\t$1",
+      ");"
+    ],
+    "description": "Creates a RXJS pipe"
+  },
+  "rxjs-filter": {
+    "prefix": "rfilt",
+    "body": [
+      "filter(($1) => {",
+      "\t return $0",
+      "}),"
+    ],
+    "description": "Creates a RXJS filter"
+  },
+  "rxjs-map": {
+    "prefix": "rmap",
+    "body": [
+      "map(($1) => {",
+      "\t return $0",
+      "}),"
+    ],
+    "description": "Creates a RXJS map"
   }
 }
