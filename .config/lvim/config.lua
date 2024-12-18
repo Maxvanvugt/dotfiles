@@ -28,13 +28,38 @@ lvim.builtin.which_key.mappings["c"] = {
   w = { ":close<cr>", "Close Window" },
 }
 
-lvim.builtin.which_key.mappings["j"] = {
-  name = "LSP Saga",
-  f = { ":Lspsaga peek_definition<cr>", "Peek Defintion" },
-  d = { ":Lspsaga goto_definition<cr>", "Goto Definition" },
-  s = { ":Lspsaga diagnostic_jump_next<cr>", "Diagnostic Jump Next" },
-  a = { ":Lspsaga hover_doc<cr>", "Hover Doc" },
+lvim.builtin.which_key.mappings["l"] = {
+  name = "LSP",
+  a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+  d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
+  w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
+  f = { "<cmd>lua require('lvim.lsp.utils').format()<cr>", "Format" },
+  i = { "<cmd>LspInfo<cr>", "Info" },
+  I = { "<cmd>Mason<cr>", "Mason Info" },
+  j = {
+    "<cmd>lua vim.diagnostic.goto_next()<cr>",
+    "Next Diagnostic",
+  },
+  k = {
+    "<cmd>lua vim.diagnostic.goto_prev()<cr>",
+    "Prev Diagnostic",
+  },
+  l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+  q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
+  r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+  s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+  S = {
+    "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+    "Workspace Symbols",
+  },
+  e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
+  g = { ":Lspsaga peek_definition<cr>", "Peek Defintion" },
+  h = { ":Lspsaga goto_definition<cr>", "Goto Definition" },
+  m = { ":Lspsaga diagnostic_jump_next<cr>", "Diagnostic Jump Next" },
+  n = { ":Lspsaga hover_doc<cr>", "Hover Doc" },
+  v = { ":Lspsaga finder<cr>", "Hover Doc" },
 }
+
 
 lvim.plugins = {
   -- Shows color preview for hexdecimal numbers in text
