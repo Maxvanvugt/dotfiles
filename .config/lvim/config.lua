@@ -1,10 +1,16 @@
 vim.opt.relativenumber = true
+vim.o.timeoutlen = 0
 
 lvim.keys.normal_mode["m"] = ":write<CR>"
 lvim.keys.normal_mode["S"] = ":HopWordCurrentLine<CR>"
 
 lvim.keys.normal_mode["<TAB>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-TAB>"] = ":BufferLineCyclePrev<CR>"
+
+lvim.builtin.telescope.theme = "center"
+lvim.builtin.gitsigns.opts.current_line_blame_opts.delay = 250
+lvim.builtin.gitsigns.opts.current_line_blame = true
+lvim.builtin.gitsigns.opts.current_line_blame_opts.virt_text_pos = 'right_align'
 
 lvim.builtin.which_key.mappings["f"] = {
   name = "Find",
@@ -30,13 +36,6 @@ lvim.builtin.which_key.mappings["j"] = {
   a = { ":Lspsaga hover_doc<cr>", "Hover Doc" },
 }
 
-lvim.builtin.which_key.mappings["k"] = {
-  name = "Git Signs",
-  f = { ":Gitsigns next_hunk<cr>", "Next Hunk" },
-  d = { ":Gitsigns toggle_current_line_blame<cr>", "Toggle Current Line Blame" },
-}
-
-lvim.builtin.telescope.theme = "center"
 lvim.plugins = {
   -- Shows color preview for hexdecimal numbers in text
   {
