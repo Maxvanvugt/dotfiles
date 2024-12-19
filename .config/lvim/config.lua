@@ -12,6 +12,13 @@ lvim.builtin.gitsigns.opts.current_line_blame_opts.delay = 250
 lvim.builtin.gitsigns.opts.current_line_blame = true
 lvim.builtin.gitsigns.opts.current_line_blame_opts.virt_text_pos = 'right_align'
 
+-- Macros
+lvim.builtin.which_key.mappings["m"] = {
+  name = "Macros",
+  a = { "0ea.only<ESC>", "Set only" },
+  s = { "0eeediwhx<ESC>", "Delete only" }
+}
+
 lvim.builtin.which_key.mappings["f"] = {
   name = "Find",
   f = { ":Telescope find_files<cr>", "Find Files" },
@@ -30,7 +37,7 @@ lvim.builtin.which_key.mappings["c"] = {
 
 lvim.builtin.which_key.mappings["l"] = {
   name = "LSP",
-  a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+  a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code " },
   d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
   w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
   f = { "<cmd>lua require('lvim.lsp.utils').format()<cr>", "Format" },
@@ -44,7 +51,7 @@ lvim.builtin.which_key.mappings["l"] = {
     "<cmd>lua vim.diagnostic.goto_prev()<cr>",
     "Prev Diagnostic",
   },
-  l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+  l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens " },
   q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
   r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
   s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
@@ -118,5 +125,8 @@ lvim.plugins = {
     config = function()
       require("lsp-file-operations").setup()
     end,
+  },
+  {
+    'mg979/vim-visual-multi'
   }
 }
