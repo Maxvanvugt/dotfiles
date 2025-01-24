@@ -125,7 +125,6 @@ lvim.plugins = {
   {
     'jay-babu/mason-nvim-dap.nvim',
     event = "VeryLazy",
-    enabled = false,
     config = function()
       require("mason").setup()
       require("mason-nvim-dap").setup()
