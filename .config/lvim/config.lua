@@ -1,3 +1,5 @@
+require("colors").setup()
+
 vim.opt.relativenumber = true
 vim.o.timeoutlen = 0
 

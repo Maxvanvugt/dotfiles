@@ -1,17 +1,37 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "_start-flavours": "",
+"base00": "#071011",
+"base01": "#0f2224",
+"base02": "#5e7173",
+"base03": "#849496",
+"base04": "#aab8ba",
+"base05": "#e1edef",
+"base06": "#d7e1e3",
+"base07": "#dee6e8",
+"base08": "#5d7c92",
+"base09": "#677d78",
+"base0A": "#2b8948",
+"base0B": "#d34f33",
+"base0C": "#6e7c6b",
+"base0D": "#d6bf49",
+"base0E": "#2781a1",
+"base0F": "#28829f",
+    "_end-flavours": ""
+  },
   "blocks": [
     {
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#416978",
+          "foreground": "p:base03",
           "style": "plain",
-          "template": "{{ .Icon }}",
+          "template": "{{ .Icon }} ",
           "type": "os"
         },
         {
-          "foreground": "#416978",
+          "foreground": "p:base03",
           "properties": {
             "folder_separator_icon": "/",
             "style": "full"
@@ -21,7 +41,7 @@
           "type": "path"
         },
         {
-          "foreground": "#ffffff",
+          "foreground": "p:white",
           "powerline_symbol": "\ue0b0",
           "properties": {
             "fetch_stash_count": true,
@@ -39,15 +59,15 @@
       "newline": true,
       "segments": [
         {
-          "foreground": "#958b83",
+          "foreground": "p:base07",
           "style": "plain",
           "template": "\ue3bf ",
           "type": "root"
         },
         {
-          "foreground": "#958b83",
+          "foreground": "p:base07",
           "style": "plain",
-          "template": "> ",
+          "template": ">  ",
           "type": "text"
         }
       ],
