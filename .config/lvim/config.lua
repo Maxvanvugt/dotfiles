@@ -15,6 +15,40 @@ lvim.builtin.gitsigns.opts.current_line_blame = true
 lvim.builtin.gitsigns.opts.current_line_blame_opts.virt_text_pos = 'right_align'
 
 local osys = require("cmake-tools.osys");
+-- Add a custom command to organize imports in TypeScript files
+vim.api.nvim_create_user_command('OrganizeImports', function()
+  -- Get the current buffer's file type
+  local filetype = vim.bo.filetype
+
+  -- Check if the file type is TypeScript or TypeScript React
+  if filetype == 'typescript' or filetype == 'typescriptreact' then
+    -- Execute the `organizeImports` command via tsserver
+    vim.lsp.buf.execute_command({
+      command = '_typescript.organizeImports',
+      arguments = { vim.api.nvim_buf_get_name(0) },
+    })
+    print("Imports organized!")
+  else
+    print("This command is only available for TypeScript files.")
+  end
+end, {})
+
+
+vim.api.nvim_create_user_command('ConsoleLog', function()
+  local yank_content = vim.fn.getreg('"')
+  local formatted_text = string.format('console.log("%s", %s);', yank_content, yank_content)
+  vim.api.nvim_put({formatted_text}, 'c', true, true)
+end, {})
+
+-- Create a custom key mapping (e.g., <leader>yl)
+vim.api.nvim_set_keymap('n', '<leader>yl', '<cmd>lua format_yank_to_console_log()<CR>', { noremap = true, silent = true })
+lvim.keys.normal_mode["<leader>oi"] = ":OrganizeImports<CR>"
+
+
+lvim.builtin.which_key.mappings["u"] = {
+  name = "Utils",
+  l = { ":ConsoleLog<CR>", "Console log" },
+}
 
 lvim.builtin.which_key.mappings["f"] = {
   name = "Find",
@@ -39,6 +73,7 @@ lvim.builtin.which_key.mappings["l"] = {
   w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
   f = { "<cmd>lua require('lvim.lsp.utils').format()<cr>", "Format" },
   i = { "<cmd>LspInfo<cr>", "Info" },
+  o = { ":OrganizeImports<CR>", "Organize imports" },
   I = { "<cmd>Mason<cr>", "Mason Info" },
   j = {
     "<cmd>lua vim.diagnostic.goto_next()<cr>",
@@ -61,9 +96,9 @@ lvim.builtin.which_key.mappings["l"] = {
   h = { ":Lspsaga goto_definition<cr>", "Goto Definition" },
   m = { ":Lspsaga diagnostic_jump_next<cr>", "Diagnostic Jump Next" },
   n = { ":Lspsaga hover_doc<cr>", "Hover Doc" },
-  v = { ":Lspsaga finder<cr>", "Hover Doc" },
+  v = { ":Lspsaga finder<cr>", "Finder" },
+  t = { ":lua vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })<cr>", "Toggle virutal text" },
 }
-
 
 lvim.plugins = {
   -- Shows color preview for hexdecimal numbers in text
