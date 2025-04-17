@@ -1,4 +1,5 @@
 alias v="lvim "
+alias c="cd ~/Documents/dev-projects/cpp/ "
 alias i="sudo pacman -S "
 alias ia="yay -S "
 alias sr="sudo rm -r "
