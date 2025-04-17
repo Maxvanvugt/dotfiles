@@ -1,8 +1,11 @@
-require("colors").setup()
-
 vim.opt.relativenumber = true
 vim.o.timeoutlen = 0
 vim.opt.shada = { "'100", "<50", "s10", "h" }
+
+vim.opt.tabstop = 4       -- Width of a \t character (display)
+vim.opt.shiftwidth = 4    -- Indent size for `>>`, `<<`, auto-indent
+vim.opt.softtabstop = 4   -- Spaces inserted when pressing <Tab>
+vim.opt.expandtab = true  -- Convert tabs to spaces
 
 lvim.keys.normal_mode["m"] = ":write<CR>"
 lvim.keys.normal_mode["S"] = ":HopWordCurrentLine<CR>"
@@ -14,42 +17,6 @@ lvim.builtin.telescope.theme = "center"
 lvim.builtin.gitsigns.opts.current_line_blame_opts.delay = 250
 lvim.builtin.gitsigns.opts.current_line_blame = true
 lvim.builtin.gitsigns.opts.current_line_blame_opts.virt_text_pos = 'right_align'
-
-local osys = require("cmake-tools.osys");
--- Add a custom command to organize imports in TypeScript files
-vim.api.nvim_create_user_command('OrganizeImports', function()
-  -- Get the current buffer's file type
-  local filetype = vim.bo.filetype
-
-  -- Check if the file type is TypeScript or TypeScript React
-  if filetype == 'typescript' or filetype == 'typescriptreact' then
-    -- Execute the `organizeImports` command via tsserver
-    vim.lsp.buf.execute_command({
-      command = '_typescript.organizeImports',
-      arguments = { vim.api.nvim_buf_get_name(0) },
-    })
-    print("Imports organized!")
-  else
-    print("This command is only available for TypeScript files.")
-  end
-end, {})
-
-
-vim.api.nvim_create_user_command('ConsoleLog', function()
-  local yank_content = vim.fn.getreg('"')
-  local formatted_text = string.format('console.log("%s", %s);', yank_content, yank_content)
-  vim.api.nvim_put({formatted_text}, 'c', true, true)
-end, {})
-
--- Create a custom key mapping (e.g., <leader>yl)
-vim.api.nvim_set_keymap('n', '<leader>yl', '<cmd>lua format_yank_to_console_log()<CR>', { noremap = true, silent = true })
-lvim.keys.normal_mode["<leader>oi"] = ":OrganizeImports<CR>"
-
-
-lvim.builtin.which_key.mappings["u"] = {
-  name = "Utils",
-  l = { ":ConsoleLog<CR>", "Console log" },
-}
 
 lvim.builtin.which_key.mappings["f"] = {
   name = "Find",
@@ -67,14 +34,6 @@ lvim.builtin.which_key.mappings["c"] = {
   w = { ":close<cr>", "Close Window" },
 }
 
-lvim.builtin.which_key.mappings["m"] = {
-  name = "Marks",
-  m = { "<Plug>(Marks-toggle)", "Toggle mark" },
-  j = { "<Plug>(Marks-next)", "Marks next" },
-  k = { "<Plug>(Marks-prev)", "Marks previous" },
-  l = { "<cmd>Telescope marks<cr>", "List marks" },
-}
-
 lvim.builtin.which_key.mappings["l"] = {
   name = "LSP",
   a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -82,7 +41,6 @@ lvim.builtin.which_key.mappings["l"] = {
   w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
   f = { "<cmd>lua require('lvim.lsp.utils').format()<cr>", "Format" },
   i = { "<cmd>LspInfo<cr>", "Info" },
-  o = { ":OrganizeImports<CR>", "Organize imports" },
   I = { "<cmd>Mason<cr>", "Mason Info" },
   j = {
     "<cmd>lua vim.diagnostic.goto_next()<cr>",
@@ -105,8 +63,18 @@ lvim.builtin.which_key.mappings["l"] = {
   h = { ":Lspsaga goto_definition<cr>", "Goto Definition" },
   m = { ":Lspsaga diagnostic_jump_next<cr>", "Diagnostic Jump Next" },
   n = { ":Lspsaga hover_doc<cr>", "Hover Doc" },
-  v = { ":Lspsaga finder<cr>", "Finder" },
-  t = { ":lua vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })<cr>", "Toggle virutal text" },
+  v = { ":Lspsaga finder<cr>", "Hover Doc" },
+}
+
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    name = "clang_format",
+    args = { 
+      "-style={BasedOnStyle: Google, IndentWidth: 4}"  -- Replace `Google` with `LLVM`, `Chromium`, etc.
+    },
+    filetypes = { "cpp" },
+  }
 }
 
 lvim.plugins = {
@@ -114,6 +82,7 @@ lvim.plugins = {
   {
     'norcalli/nvim-colorizer.lua'
   },
+
   -- Jump to words in text
   {
     "folke/flash.nvim",
@@ -124,14 +93,17 @@ lvim.plugins = {
       { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
     },
   },
+
   -- Jump to words in text
   {
     'ggandor/leap.nvim'
   },
+
   -- Catppuccin theme
   {
     'catppuccin/nvim'
   },
+
   -- Extends LSP capabilities
   {
     'nvimdev/lspsaga.nvim',
@@ -147,6 +119,7 @@ lvim.plugins = {
       'nvim-tree/nvim-web-devicons',     -- optional
     },
   },
+
   -- Used for jumping to word in line
   {
     'hadronized/hop.nvim',
@@ -156,6 +129,7 @@ lvim.plugins = {
       })
     end
   },
+
   -- Autoupdates imports on edit
   {
     "antosha417/nvim-lsp-file-operations",
@@ -167,6 +141,7 @@ lvim.plugins = {
       require("lsp-file-operations").setup()
     end,
   },
+
   -- Catppuccin theme
   {
     'jay-babu/mason-nvim-dap.nvim',
@@ -174,10 +149,8 @@ lvim.plugins = {
     config = function()
       require("mason").setup()
       require("mason-nvim-dap").setup()
-
       -- DAP Configuration for C++
       local dap = require('dap')
-
       -- Ensure you have codelldb installed via mason
       require('mason-nvim-dap').setup({
         ensure_installed = { 'codelldb' },
@@ -192,7 +165,6 @@ lvim.plugins = {
           args = { '--port', '13000' }
         }
       }
-
       dap.configurations.cpp = {
         {
           name = "Launch file", -- This is the configuration name
@@ -206,7 +178,6 @@ lvim.plugins = {
           args = {},
         }
       }
-
       dap.configurations.c = dap.configurations.cpp -- Use the same config for C if you want
     end,
     opts = {
@@ -214,163 +185,6 @@ lvim.plugins = {
       ensure_installed = {
         "codelldb"
       }
-    }
-  },
-  --
-  {
-    'Civitasv/cmake-tools.nvim',
-    osys = require("cmake-tools.osys");
-    require("cmake-tools").setup {
-      cmake_command = "cmake",                                      -- this is used to specify cmake command path
-      ctest_command = "ctest",                                      -- this is used to specify ctest command path
-      cmake_use_preset = true,
-      cmake_regenerate_on_save = true,                              -- auto generate when save CMakeLists.txt
-      cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" }, -- this will be passed when invoke `CMakeGenerate`
-      cmake_build_options = {},                                     -- this will be passed when invoke `CMakeBuild`
-      -- support macro expansion:
-      --       ${kit}
-      --       ${kitGenerator}
-      --       ${variant:xx}
-      cmake_build_directory = function()
-        if osys.iswin32 then
-          return "out\\${variant:buildType}"
-        end
-        return "out/${variant:buildType}"
-      end,                                   -- this is used to specify generate directory for cmake, allows macro expansion, can be a string or a function returning the string, relative to cwd.
-      cmake_soft_link_compile_commands = true, -- this will automatically make a soft link from compile commands file to project root dir
-      cmake_compile_commands_from_lsp = false, -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
-      cmake_kits_path = nil,                 -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
-      cmake_variants_message = {
-        short = { show = true },             -- whether to show short message
-        long = { show = true, max_length = 40 }, -- whether to show long message
-      },
-      cmake_dap_configuration = {            -- debug settings for cmake
-        name = "cpp",
-        type = "codelldb",
-        request = "launch",
-        stopOnEntry = false,
-        runInTerminal = true,
-        console = "integratedTerminal",
-      },
-      cmake_executor = {                -- executor to use
-        name = "quickfix",              -- name of the executor
-        opts = {},                      -- the options the executor will get, possible values depend on the executor type. See `default_opts` for possible values.
-        default_opts = {                -- a list of default and possible values for executors
-          quickfix = {
-            show = "always",            -- "always", "only_on_error"
-            position = "belowright",    -- "vertical", "horizontal", "leftabove", "aboveleft", "rightbelow", "belowright", "topleft", "botright", use `:h vertical` for example to see help on them
-            size = 10,
-            encoding = "utf-8",         -- if encoding is not "utf-8", it will be converted to "utf-8" using `vim.fn.iconv`
-            auto_close_when_success = true, -- typically, you can use it with the "always" option; it will auto-close the quickfix buffer if the execution is successful.
-          },
-          toggleterm = {
-            direction = "float", -- 'vertical' | 'horizontal' | 'tab' | 'float'
-            close_on_exit = false, -- whether close the terminal when exit
-            auto_scroll = true, -- whether auto scroll to the bottom
-            singleton = true,  -- single instance, autocloses the opened one, if present
-          },
-          overseer = {
-            new_task_opts = {
-              strategy = {
-                "toggleterm",
-                direction = "horizontal",
-                autos_croll = true,
-                quit_on_exit = "success"
-              }
-            }, -- options to pass into the `overseer.new_task` command
-            on_new_task = function(task)
-              require("overseer").open(
-                { enter = false, direction = "right" }
-              )
-            end, -- a function that gets overseer.Task when it is created, before calling `task:start`
-          },
-          terminal = {
-            name = "Main Terminal",
-            prefix_name = "[CMakeTools]: ", -- This must be included and must be unique, otherwise the terminals will not work. Do not use a simple spacebar " ", or any generic name
-            split_direction = "horizontal", -- "horizontal", "vertical"
-            split_size = 11,
-    "chentoast/marks.nvim",
-    event = "VeryLazy",
-    opts = {},
-    config = function()
-      require("marks").setup({
-        default_mappings = false,
-        force_write_shada = true
-      })
-    end
-  },
-
-            -- Window handling
-            single_terminal_per_instance = true, -- Single viewport, multiple windows
-            single_terminal_per_tab = true,   -- Single viewport per tab
-            keep_terminal_static_location = true, -- Static location of the viewport if avialable
-            auto_resize = true,               -- Resize the terminal if it already exists
-  {
-    "mg979/vim-visual-multi"
-  }
-
-            -- Running Tasks
-            start_insert = false,   -- If you want to enter terminal with :startinsert upon using :CMakeRun
-            focus = false,          -- Focus on terminal when cmake task is launched.
-            do_not_add_newline = false, -- Do not hit enter on the command inserted when using :CMakeRun, allowing a chance to review or modify the command before hitting enter.
-          },                        -- terminal executor uses the values in cmake_terminal
-        },
-      },
-      cmake_runner = {           -- runner to use
-        name = "terminal",       -- name of the runner
-        opts = {},               -- the options the runner will get, possible values depend on the runner type. See `default_opts` for possible values.
-        default_opts = {         -- a list of default and possible values for runners
-          quickfix = {
-            show = "always",     -- "always", "only_on_error"
-            position = "belowright", -- "bottom", "top"
-            size = 10,
-            encoding = "utf-8",
-            auto_close_when_success = true, -- typically, you can use it with the "always" option; it will auto-close the quickfix buffer if the execution is successful.
-          },
-          toggleterm = {
-            direction = "float", -- 'vertical' | 'horizontal' | 'tab' | 'float'
-            close_on_exit = false, -- whether close the terminal when exit
-            auto_scroll = true, -- whether auto scroll to the bottom
-            singleton = true,  -- single instance, autocloses the opened one, if present
-          },
-          overseer = {
-            new_task_opts = {
-              strategy = {
-                "toggleterm",
-                direction = "horizontal",
-                autos_croll = true,
-                quit_on_exit = "success"
-              }
-            }, -- options to pass into the `overseer.new_task` command
-            on_new_task = function(task)
-            end, -- a function that gets overseer.Task when it is created, before calling `task:start`
-          },
-          terminal = {
-            name = "Main Terminal",
-            prefix_name = "[CMakeTools]: ", -- This must be included and must be unique, otherwise the terminals will not work. Do not use a simple spacebar " ", or any generic name
-            split_direction = "horizontal", -- "horizontal", "vertical"
-            split_size = 11,
-
-            -- Window handling
-            single_terminal_per_instance = true, -- Single viewport, multiple windows
-            single_terminal_per_tab = true,   -- Single viewport per tab
-            keep_terminal_static_location = true, -- Static location of the viewport if avialable
-            auto_resize = true,               -- Resize the terminal if it already exists
-
-            -- Running Tasks
-            start_insert = false,   -- If you want to enter terminal with :startinsert upon using :CMakeRun
-            focus = false,          -- Focus on terminal when cmake task is launched.
-            do_not_add_newline = false, -- Do not hit enter on the command inserted when using :CMakeRun, allowing a chance to review or modify the command before hitting enter.
-          },
-        },
-      },
-      cmake_notifications = {
-        runner = { enabled = true },
-        executor = { enabled = true },
-        spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }, -- icons used for progress display
-        refresh_rate_ms = 100, -- how often to iterate icons
-      },
-      cmake_virtual_text_support = true, -- Show the target related to current file using virtual text (at right corner)
     }
   }
 }
