@@ -2,6 +2,7 @@ require("colors").setup()
 
 vim.opt.relativenumber = true
 vim.o.timeoutlen = 0
+vim.opt.shada = { "'100", "<50", "s10", "h" }
 
 lvim.keys.normal_mode["m"] = ":write<CR>"
 lvim.keys.normal_mode["S"] = ":HopWordCurrentLine<CR>"
@@ -64,6 +65,14 @@ lvim.builtin.which_key.mappings["c"] = {
   l = { ":BufferLineCloseLeft<cr>", "Close Left" },
   r = { ":BufferLineCloseRight<cr>", "Close Right" },
   w = { ":close<cr>", "Close Window" },
+}
+
+lvim.builtin.which_key.mappings["m"] = {
+  name = "Marks",
+  m = { "<Plug>(Marks-toggle)", "Toggle mark" },
+  j = { "<Plug>(Marks-next)", "Marks next" },
+  k = { "<Plug>(Marks-prev)", "Marks previous" },
+  l = { "<cmd>Telescope marks<cr>", "List marks" },
 }
 
 lvim.builtin.which_key.mappings["l"] = {
@@ -280,12 +289,25 @@ lvim.plugins = {
             prefix_name = "[CMakeTools]: ", -- This must be included and must be unique, otherwise the terminals will not work. Do not use a simple spacebar " ", or any generic name
             split_direction = "horizontal", -- "horizontal", "vertical"
             split_size = 11,
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function()
+      require("marks").setup({
+        default_mappings = false,
+        force_write_shada = true
+      })
+    end
+  },
 
             -- Window handling
             single_terminal_per_instance = true, -- Single viewport, multiple windows
             single_terminal_per_tab = true,   -- Single viewport per tab
             keep_terminal_static_location = true, -- Static location of the viewport if avialable
             auto_resize = true,               -- Resize the terminal if it already exists
+  {
+    "mg979/vim-visual-multi"
+  }
 
             -- Running Tasks
             start_insert = false,   -- If you want to enter terminal with :startinsert upon using :CMakeRun
