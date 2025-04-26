@@ -7,3 +7,6 @@ export PATH=/home/max/.local/bin:$PATH
 
 eval "$(oh-my-posh init zsh --config ~/posh-theme.omp.json)"
 source $ZSH/oh-my-zsh.sh
+
+export EDITOR=lvim
+export VISUAL=lvim
