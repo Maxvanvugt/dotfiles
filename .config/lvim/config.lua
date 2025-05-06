@@ -45,6 +45,18 @@ lvim.builtin.which_key.mappings["c"] = {
   w = { ":close<cr>", "Close Window" },
 }
 
+lvim.builtin.which_key.mappings["m"] = {
+  name = "Marks",
+  l = { "<cmd>Telescope marks<cr>", "List marks" },
+  t = {"<Plug>(Marks-toggle)", "Toggle marks"},
+  m = { function()
+    local mark = vim.fn.input("Enter mark letter: ")
+    if mark ~= "" then
+      vim.cmd("normal! m" .. mark)
+    end
+  end, "Make mark" }
+}
+
 lvim.builtin.which_key.mappings["l"] = {
   name = "LSP",
   a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -82,7 +94,7 @@ formatters.setup {
   {
     name = "clang_format",
     args = { 
-      "-style={BasedOnStyle: Google, IndentWidth: 4}"  -- Replace `Google` with `LLVM`, `Chromium`, etc.
+      "-style={BasedOnStyle: Chromium, IndentWidth: 4}"  -- Replace `Google` with `LLVM`, `Chromium`, etc.
     },
     filetypes = { "cpp" },
   }
