@@ -45,6 +45,13 @@ lvim.builtin.which_key.mappings["c"] = {
   w = { ":close<cr>", "Close Window" },
 }
 
+lvim.builtin.which_key.mappings["x"] = {
+  name = "Checkbox",
+  x = { ":norm 0lrx<cr>", "Check mark" },
+  c = { ":norm 0lr<space><cr>", "Uncheck mark" },
+  n = { ":norm o[ ] <cr>i ", "New mark" }
+}
+
 lvim.builtin.which_key.mappings["m"] = {
   name = "Marks",
   l = { "<cmd>Telescope marks<cr>", "List marks" },
@@ -87,6 +94,9 @@ lvim.builtin.which_key.mappings["l"] = {
   m = { ":Lspsaga diagnostic_jump_next<cr>", "Diagnostic Jump Next" },
   n = { ":Lspsaga hover_doc<cr>", "Hover Doc" },
   v = { ":Lspsaga finder<cr>", "Hover Doc" },
+  z = { function()
+        vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+  end, "Toggle diagnostic" }
 }
 
 local formatters = require "lvim.lsp.null-ls.formatters"
@@ -120,6 +130,16 @@ lvim.plugins = {
   -- Jump to words in text
   {
     'ggandor/leap.nvim'
+  },
+
+  -- For formatting columns 
+  {
+    'godlygeek/tabular'
+  },
+
+  -- Diff view
+  {
+    'sindrets/diffview.nvim'
   },
 
   -- Catppuccin theme
