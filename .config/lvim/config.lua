@@ -47,9 +47,24 @@ lvim.builtin.which_key.mappings["c"] = {
 
 lvim.builtin.which_key.mappings["x"] = {
   name = "Checkbox",
-  x = { ":norm 0lrx<cr>", "Check mark" },
-  c = { ":norm 0lr<space><cr>", "Uncheck mark" },
-  n = { ":norm o[ ] <cr>i ", "New mark" }
+  n = { ":norm o-<space>[ ]<space><cr>i ", "New mark" },
+  x = { function()
+    local original_pos = vim.api.nvim_win_get_cursor(0)
+
+    vim.cmd("normal 0wl")
+
+    local line = vim.fn.getline('.')
+    local col = vim.fn.col('.')
+    local char = line:sub(col, col)
+
+    if char == 'x' then
+        vim.cmd("normal r ")
+    else
+        vim.cmd("normal rx")
+    end
+
+    vim.api.nvim_win_set_cursor(0, original_pos)
+  end, "Toggle mark"}
 }
 
 lvim.builtin.which_key.mappings["m"] = {
