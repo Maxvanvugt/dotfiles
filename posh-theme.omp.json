@@ -26,12 +26,6 @@
       "segments": [
         {
           "foreground": "p:base03",
-          "style": "plain",
-          "template": "{{ .Icon }} ",
-          "type": "os"
-        },
-        {
-          "foreground": "p:base03",
           "properties": {
             "folder_separator_icon": "/",
             "style": "full"
