@@ -11,6 +11,7 @@ return {
 		".luarc.json",
 		".luarc.jsonc",
 		".stylua.toml",
+		"init.lua",
 		"selene.toml",
 		"selene.yml",
 		"stylua.toml",

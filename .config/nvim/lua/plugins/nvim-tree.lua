@@ -1,3 +1,4 @@
+-- TODO: Replace with mini.files
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "*",
