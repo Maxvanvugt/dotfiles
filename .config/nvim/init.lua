@@ -2,6 +2,8 @@ require("core.lazy")
 
 vim.lsp.enable("ts_ls")
 
+vim.cmd("colorscheme wildcharm")
+
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.swapfile = false
@@ -52,8 +54,8 @@ vim.keymap.set("x", '<leader>"', function() require("mini.surround").add("visual
 -- Git
 vim.keymap.set( "n", "<leader>gt", "<cmd>lua MiniDiff.toggle_overlay()<cr>", { desc = "Toggle diff overlay", remap = true })
 vim.keymap.set("n", "<leader>gn", "<cmd>lua MiniDiff.goto_hunk('next')<cr>", { desc = "Goto next hunk", remap = true })
-vim.keymap.set( "n", "<leader>gp", "<cmd>lua MiniDiff.goto_hunk('prev')<cr>", { desc = "Goto previous hunk", remap = true }
-)
+vim.keymap.set( "n", "<leader>gp", "<cmd>lua MiniDiff.goto_hunk('prev')<cr>", { desc = "Goto previous hunk", remap = true })
+vim.keymap.set( "n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Open lazygit", remap = true })
 
 -- Flash
 vim.keymap.set("n", ";", "<cmd>lua require('flash').jump()<cr>", { desc = "Goto word", remap = true, nowait = true })
