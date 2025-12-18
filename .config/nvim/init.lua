@@ -11,7 +11,6 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.clipboard = "unnamedplus"
 vim.opt.hidden = true
-vim.opt.guicursor:append("c:blinkon0")
 
 -- Write
 vim.keymap.set("n", "m", ":write<CR>", { desc = "Write file" })
@@ -30,7 +29,7 @@ vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true 
 vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 
 -- File tree toggle
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Explorer", remap = true })
+vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>", { desc = "Explorer", remap = true })
 
 -- LSP
 vim.keymap.set("n", "<leader>ln", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
@@ -59,6 +58,10 @@ vim.keymap.set( "n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Open lazygit", 
 
 -- Flash
 vim.keymap.set("n", ";", "<cmd>lua require('flash').jump()<cr>", { desc = "Goto word", remap = true, nowait = true })
+
+-- Buffers
+vim.keymap.set('n', '<leader>co', require('core.functions').close_other_buffers, { desc = 'Close other buffers' })
+vim.keymap.set('n', '<leader>cc', "<cmd>lua MiniBufremove.delete()<cr>", { desc = 'Close current buffer' })
 
 local notify = vim.notify
 vim.notify = function(msg, level, opts)

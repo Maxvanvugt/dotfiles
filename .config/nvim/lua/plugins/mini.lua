@@ -8,16 +8,15 @@ return {
 		require("mini.tabline").setup()
 		require("mini.sessions").setup()
 		require("mini.diff").setup()
+		require("mini.pairs").setup()
+		require("mini.files").setup()
+		require("mini.bufremove").setup()
 		-- TODO: This module causes blinking in statusbar
 		require("mini.completion").setup()
 		require("mini.colors").setup()
 
-		local win_width = 60
-		local win_height = 10
-
 		require("mini.clue").setup({
 			triggers = {
-				-- Leader triggers
 				{ mode = "n", keys = "<Leader>" },
 				{ mode = "x", keys = "<Leader>" },
 			},
@@ -27,6 +26,10 @@ return {
 					width = vim.o.columns - 50,
 					col = vim.o.columns - 25,
 				},
+			},
+			clues = {
+				{ mode = "n", keys = "<leader>g", desc = "Git" },
+				{ mode = "n", keys = "<leader>l", desc = "LSP" },
 			},
 		})
 	end,
