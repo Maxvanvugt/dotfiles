@@ -8,6 +8,12 @@ vim.cmd("set ignorecase")
 
 vim.notify = require("core.functions").notify
 
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'FloatTitle', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'DiagnosticFloatingWarn', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'DiagnosticFloatingHint', { bg = 'NONE' })
+
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.swapfile = false
