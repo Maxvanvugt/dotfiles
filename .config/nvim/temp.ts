@@ -1,3 +1,0 @@
-const hallo: string = 'd'
-
-
