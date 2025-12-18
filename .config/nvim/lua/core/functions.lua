@@ -1,4 +1,5 @@
 local M = {}
+local notify = vim.notify
 
 function M.close_other_buffers()
 	local current_buf = vim.api.nvim_get_current_buf()
@@ -9,6 +10,14 @@ function M.close_other_buffers()
 			require("mini.bufremove").delete(buf, false)
 		end
 	end
+end
+
+function M.notify(msg, level, opts)
+	-- Only show errors (vim.log.levels.ERROR)
+	if level ~= vim.log.levels.ERROR then
+		return
+	end
+	notify(msg, level, opts)
 end
 
 return M

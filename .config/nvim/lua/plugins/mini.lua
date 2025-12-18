@@ -1,6 +1,9 @@
 return {
 	"nvim-mini/mini.nvim",
 	version = "*",
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+	},
 	config = function()
 		require("mini.ai").setup()
 		require("mini.files").setup()
@@ -11,15 +14,11 @@ return {
 		require("mini.pairs").setup()
 		require("mini.files").setup()
 		require("mini.bufremove").setup()
-		require("mini.git").setup({
-			job = {
-				git_executable = "git",
-				timeout = 30000,
-			},
-		})
+		require("mini.git").setup()
 		-- TODO: This module causes blinking in statusbar
 		require("mini.completion").setup()
 		require("mini.colors").setup()
+		require("mini.move").setup()
 
 		require("mini.clue").setup({
 			triggers = {
@@ -37,6 +36,7 @@ return {
 				{ mode = "n", keys = "<leader>g", desc = "Git" },
 				{ mode = "n", keys = "<leader>l", desc = "LSP" },
 				{ mode = "n", keys = "<leader>c", desc = "Close" },
+				{ mode = "n", keys = "<leader>f", desc = "Find" },
 			},
 		})
 	end,
