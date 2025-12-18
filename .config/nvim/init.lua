@@ -1,8 +1,10 @@
 require("core.lazy")
 
 vim.lsp.enable("ts_ls")
+vim.lsp.enable("lua_ls")
 
 vim.cmd("colorscheme wildcharm")
+vim.cmd("set ignorecase")
 
 vim.opt.cursorline = true
 vim.opt.number = true
@@ -11,6 +13,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.clipboard = "unnamedplus"
 vim.opt.hidden = true
+vim.opt.timeoutlen = 0
 
 -- Write
 vim.keymap.set("n", "m", ":write<CR>", { desc = "Write file" })
@@ -34,8 +37,10 @@ vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>", { desc = "Expl
 -- LSP
 vim.keymap.set("n", "<leader>ln", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
 vim.keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code action" })
-vim.keymap.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "References" })
-vim.keymap.set("n", "<leader>li", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "Implementation" })
+vim.keymap.set("n", "<leader>lr", ":Telescope lsp_references<cr>", { desc = "References" })
+vim.keymap.set("n", "<leader>li", ":Telescope lsp_implementations<cr>", { desc = "Implementations" })
+vim.keymap.set("n", "<leader>lh", ":Telescope lsp_definitions<cr>", { desc = "Definitions" })
+vim.keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<cr>", { desc = "Format" })
 
 -- Window
 vim.keymap.set("n", "<C-j>", "<C-w>j", { remap = true })
@@ -46,29 +51,13 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { remap = true })
 -- Wrap visual selection in quotes
 vim.keymap.set("v", "'", [[c''<esc>P]], { desc = "Wrap in single quotes" })
 vim.keymap.set("v", '"', [[c""<esc>P]], { desc = "Wrap in double quotes" })
+vim.keymap.set("v", '(', [[c()<esc>P]], { desc = "Wrap in brackets" })
+vim.keymap.set("v", '[', [[c{}<esc>P]], { desc = "Wrap in curly brackets", nowait = true })
+vim.keymap.set("v", ']', [[c[]<esc>P]], { desc = "Wrap in curly brackets", nowait = true })
 
--- Wrap selection in double quotes immediately
-vim.keymap.set("x", '<leader>"', function()
-	require("mini.surround").add("visual")
-	vim.schedule(function()
-		vim.api.nvim_input('"')
-	end)
-end, { desc = "Surround with double quotes" })
-
--- Git
-vim.keymap.set(
-	"n",
-	"<leader>gt",
-	"<cmd>lua MiniDiff.toggle_overlay()<cr>",
-	{ desc = "Toggle diff overlay", remap = true }
-)
+vim.keymap.set("n", "<leader>gt", "<cmd>lua MiniDiff.toggle_overlay()<cr>", { desc = "Toggle diff overlay", remap = true })
 vim.keymap.set("n", "<leader>gn", "<cmd>lua MiniDiff.goto_hunk('next')<cr>", { desc = "Goto next hunk", remap = true })
-vim.keymap.set(
-	"n",
-	"<leader>gp",
-	"<cmd>lua MiniDiff.goto_hunk('prev')<cr>",
-	{ desc = "Goto previous hunk", remap = true }
-)
+vim.keymap.set("n", "<leader>gp", "<cmd>lua MiniDiff.goto_hunk('prev')<cr>", { desc = "Goto previous hunk", remap = true })
 vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Open lazygit", remap = true })
 
 -- Flash
@@ -77,6 +66,14 @@ vim.keymap.set("n", ";", "<cmd>lua require('flash').jump()<cr>", { desc = "Goto 
 -- Buffers
 vim.keymap.set("n", "<leader>co", require("core.functions").close_other_buffers, { desc = "Close other buffers" })
 vim.keymap.set("n", "<leader>cc", "<cmd>lua MiniBufremove.delete()<cr>", { desc = "Close current buffer" })
+
+-- Remove highlight search
+vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<cr>", { desc = "Toggle highlight search" })
+
+-- Telescope
+vim.keymap.set("n", "<leader>ff", ":Telescope find_files<cr>", { desc = "Find files" })
+vim.keymap.set("n", "<leader>fd", ":Telescope live_grep<cr>", { desc = "Live grep" })
+vim.keymap.set("n", "<leader>fg", ":Telescope git_status<cr>", { desc = "Git status" })
 
 local notify = vim.notify
 vim.notify = function(msg, level, opts)
