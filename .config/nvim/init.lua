@@ -3,7 +3,7 @@ require("core.lazy")
 vim.lsp.enable("ts_ls")
 -- vim.lsp.enable("lua_ls")
 
-vim.cmd("colorscheme wildcharm")
+vim.cmd("colorscheme miniwinter")
 vim.cmd("set ignorecase")
 
 vim.notify = require("core.functions").notify
@@ -66,7 +66,7 @@ vim.keymap.set("v", ']', [[c[]<esc>P]], { desc = "Wrap in curly brackets", nowai
 vim.keymap.set("n", "<leader>gt", "<cmd>lua MiniDiff.toggle_overlay()<cr>", { desc = "Toggle diff overlay", remap = true })
 vim.keymap.set("n", "<leader>gn", "<cmd>lua MiniDiff.goto_hunk('next')<cr>", { desc = "Goto next hunk", remap = true })
 vim.keymap.set("n", "<leader>gp", "<cmd>lua MiniDiff.goto_hunk('prev')<cr>", { desc = "Goto previous hunk", remap = true })
-vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Open lazygit", remap = true })
+vim.keymap.set("n", "<leader>gg", "<cmd>lua Snacks.lazygit()<cr>", { desc = "Open lazygit", remap = true })
 
 -- Close
 vim.keymap.set("n", "<leader>co", require("core.functions").close_other_buffers, { desc = "Close other buffers" })
@@ -83,4 +83,3 @@ vim.keymap.set("n", ";", "<cmd>lua require('flash').jump()<cr>", { desc = "Goto 
 vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<cr>", { desc = "Remove highlight search" })
 vim.keymap.set("n", "m", ":write<CR>", { desc = "Write file" })
 vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>", { desc = "Open explorer", remap = true })
-
