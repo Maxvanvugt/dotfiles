@@ -9,7 +9,6 @@ return {
 		require("mini.files").setup()
 		require("mini.surround").setup()
 		require("mini.tabline").setup()
-		require("mini.sessions").setup()
 		require("mini.diff").setup()
 		require("mini.pairs").setup()
 		require("mini.files").setup()
@@ -19,6 +18,12 @@ return {
 		require("mini.completion").setup()
 		require("mini.colors").setup()
 		require("mini.move").setup()
+		require("mini.starter").setup()
+
+		require("mini.sessions").setup({
+			directory = "~/.local/state/nvim/sessions",
+			file = "",
+		})
 
 		require("mini.clue").setup({
 			triggers = {
