@@ -11,6 +11,12 @@ return {
 		require("mini.pairs").setup()
 		require("mini.files").setup()
 		require("mini.bufremove").setup()
+		require("mini.git").setup({
+			job = {
+				git_executable = "git",
+				timeout = 30000,
+			},
+		})
 		-- TODO: This module causes blinking in statusbar
 		require("mini.completion").setup()
 		require("mini.colors").setup()
@@ -30,6 +36,7 @@ return {
 			clues = {
 				{ mode = "n", keys = "<leader>g", desc = "Git" },
 				{ mode = "n", keys = "<leader>l", desc = "LSP" },
+				{ mode = "n", keys = "<leader>c", desc = "Close" },
 			},
 		})
 	end,

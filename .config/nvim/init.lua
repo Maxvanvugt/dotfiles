@@ -48,20 +48,35 @@ vim.keymap.set("v", "'", [[c''<esc>P]], { desc = "Wrap in single quotes" })
 vim.keymap.set("v", '"', [[c""<esc>P]], { desc = "Wrap in double quotes" })
 
 -- Wrap selection in double quotes immediately
-vim.keymap.set("x", '<leader>"', function() require("mini.surround").add("visual") vim.schedule(function() vim.api.nvim_input('"') end) end, { desc = "Surround with double quotes" })
+vim.keymap.set("x", '<leader>"', function()
+	require("mini.surround").add("visual")
+	vim.schedule(function()
+		vim.api.nvim_input('"')
+	end)
+end, { desc = "Surround with double quotes" })
 
 -- Git
-vim.keymap.set( "n", "<leader>gt", "<cmd>lua MiniDiff.toggle_overlay()<cr>", { desc = "Toggle diff overlay", remap = true })
+vim.keymap.set(
+	"n",
+	"<leader>gt",
+	"<cmd>lua MiniDiff.toggle_overlay()<cr>",
+	{ desc = "Toggle diff overlay", remap = true }
+)
 vim.keymap.set("n", "<leader>gn", "<cmd>lua MiniDiff.goto_hunk('next')<cr>", { desc = "Goto next hunk", remap = true })
-vim.keymap.set( "n", "<leader>gp", "<cmd>lua MiniDiff.goto_hunk('prev')<cr>", { desc = "Goto previous hunk", remap = true })
-vim.keymap.set( "n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Open lazygit", remap = true })
+vim.keymap.set(
+	"n",
+	"<leader>gp",
+	"<cmd>lua MiniDiff.goto_hunk('prev')<cr>",
+	{ desc = "Goto previous hunk", remap = true }
+)
+vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Open lazygit", remap = true })
 
 -- Flash
 vim.keymap.set("n", ";", "<cmd>lua require('flash').jump()<cr>", { desc = "Goto word", remap = true, nowait = true })
 
 -- Buffers
-vim.keymap.set('n', '<leader>co', require('core.functions').close_other_buffers, { desc = 'Close other buffers' })
-vim.keymap.set('n', '<leader>cc', "<cmd>lua MiniBufremove.delete()<cr>", { desc = 'Close current buffer' })
+vim.keymap.set("n", "<leader>co", require("core.functions").close_other_buffers, { desc = "Close other buffers" })
+vim.keymap.set("n", "<leader>cc", "<cmd>lua MiniBufremove.delete()<cr>", { desc = "Close current buffer" })
 
 local notify = vim.notify
 vim.notify = function(msg, level, opts)
