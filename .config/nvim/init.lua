@@ -1,6 +1,7 @@
 require("core.lazy")
 
 vim.lsp.enable("ts_ls")
+vim.lsp.enable("angularls")
 -- vim.lsp.enable("lua_ls")
 
 vim.cmd("colorscheme miniwinter")
@@ -21,6 +22,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.clipboard = "unnamedplus"
 vim.opt.hidden = true
+vim.opt.termguicolors = true
 
 vim.diagnostic.config({
 	virtual_text = true,
