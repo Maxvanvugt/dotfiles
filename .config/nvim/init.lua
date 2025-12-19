@@ -4,7 +4,7 @@ vim.lsp.enable("ts_ls")
 vim.lsp.enable("angularls")
 -- vim.lsp.enable("lua_ls")
 
-vim.cmd("colorscheme miniwinter")
+vim.cmd("colorscheme lunaperche")
 vim.cmd("set ignorecase")
 
 vim.notify = require("core.functions").notify
@@ -17,6 +17,7 @@ vim.api.nvim_set_hl(0, 'DiagnosticFloatingHint', { bg = 'NONE' })
 
 vim.opt.cursorline = true
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.swapfile = false
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
