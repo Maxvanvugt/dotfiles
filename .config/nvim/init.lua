@@ -38,6 +38,13 @@ vim.diagnostic.config({
 	},
 })
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})
+
+
 -- Navigate tabs
 vim.keymap.set("n", "<TAB>", "]b", { remap = true, desc = "Next tab" })
 vim.keymap.set("n", "<S-TAB>", "[b", { remap = true, desc = "Previous tab" })
