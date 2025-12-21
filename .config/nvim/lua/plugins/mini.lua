@@ -18,9 +18,11 @@ return {
 		require("mini.completion").setup()
 		require("mini.colors").setup()
 		require("mini.move").setup()
-		require("mini.starter").setup()
 		require("mini.pick").setup()
 		require("mini.colors").setup()
+		require("mini.statusline").setup()
+		require("mini.indentscope").setup()
+		require("mini.align").setup()
 
 		require("mini.sessions").setup({
 			directory = "~/.local/state/nvim/sessions",

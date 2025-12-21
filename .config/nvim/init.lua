@@ -1,10 +1,10 @@
 require("core.lazy")
 
-vim.lsp.enable("ts_ls")
+vim.lsp.enable("ts_ ls")
 vim.lsp.enable("angularls")
 -- vim.lsp.enable("lua_ls")
 
-vim.cmd("colorscheme lunaperche")
+vim.cmd("colorscheme tokyonight-night")
 vim.cmd("set ignorecase")
 
 vim.notify = require("core.functions").notify
@@ -74,9 +74,9 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { remap = true })
 -- Wrap visual selection
 vim.keymap.set("v", "'", [[c''<esc>P]], { desc = "Wrap in single quotes" })
 vim.keymap.set("v", '"', [[c""<esc>P]], { desc = "Wrap in double quotes" })
-vim.keymap.set("v", '(', [[c()<esc>P]], { desc = "Wrap in brackets" })
-vim.keymap.set("v", '[', [[c{}<esc>P]], { desc = "Wrap in curly brackets", nowait = true })
-vim.keymap.set("v", ']', [[c[]<esc>P]], { desc = "Wrap in curly brackets", nowait = true })
+vim.keymap.set("v", "(", [[c()<esc>P]], { desc = "Wrap in brackets" })
+vim.keymap.set("v", "[", [[c{}<esc>P]], { desc = "Wrap in curly brackets", nowait = true })
+vim.keymap.set("v", "]", [[c[]<esc>P]], { desc = "Wrap in square brackets", nowait = true })
 
 -- Git
 vim.keymap.set("n", "<leader>gt", "<cmd>lua MiniDiff.toggle_overlay()<cr>", { desc = "Toggle diff overlay", remap = true })
@@ -99,3 +99,5 @@ vim.keymap.set("n", ";", "<cmd>lua require('flash').jump()<cr>", { desc = "Goto 
 vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<cr>", { desc = "Remove highlight search" })
 vim.keymap.set("n", "m", ":write<CR>", { desc = "Write file" })
 vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>", { desc = "Open explorer", remap = true })
+vim.keymap.set("v", ";", "<cmd>lua vim.cmd('normal iq')<cr>", { desc = "Move to next quotes when in visual mode" })
+vim.keymap.set("v", ".", "<cmd>lua vim.cmd('normal ia')<cr>", { desc = "Move to next quotes when in visual mode" })
