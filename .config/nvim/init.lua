@@ -1,6 +1,6 @@
 require("core.lazy")
 
-vim.lsp.enable("ts_ ls")
+vim.lsp.enable("ts_ls")
 vim.lsp.enable("angularls")
 -- vim.lsp.enable("lua_ls")
 
