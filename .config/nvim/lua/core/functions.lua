@@ -20,4 +20,8 @@ function M.notify(msg, level, opts)
 	notify(msg, level, opts)
 end
 
+function M.toggle_cursor_word()
+	vim.g.minicursorword_disable = not vim.g.minicursorword_disable
+end
+
 return M

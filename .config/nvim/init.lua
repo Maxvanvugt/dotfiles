@@ -100,4 +100,5 @@ vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<cr>", { desc = "Remove highlig
 vim.keymap.set("n", "m", ":write<CR>", { desc = "Write file" })
 vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>", { desc = "Open explorer", remap = true })
 vim.keymap.set("v", ";", "<cmd>lua vim.cmd('normal iq')<cr>", { desc = "Move to next quotes when in visual mode" })
-vim.keymap.set("v", ".", "<cmd>lua vim.cmd('normal ia')<cr>", { desc = "Move to next quotes when in visual mode" })
+vim.keymap.set("v", ".", "<cmd>lua vim.cmd('normal ia')<cr>", { desc = "Move to next argument when in visual mode" })
+vim.keymap.set("n", "<leader>m", require("core.functions").toggle_cursor_word, { desc = "Toggle cursor word" })

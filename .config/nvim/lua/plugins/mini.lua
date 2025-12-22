@@ -23,6 +23,7 @@ return {
 		require("mini.statusline").setup()
 		require("mini.indentscope").setup()
 		require("mini.align").setup()
+		require("mini.cursorword").setup()
 
 		require("mini.sessions").setup({
 			directory = "~/.local/state/nvim/sessions",
