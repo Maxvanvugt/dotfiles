@@ -61,9 +61,10 @@ vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true }
 vim.keymap.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
 vim.keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code action" })
 vim.keymap.set("n", "<leader>lh", ":Telescope lsp_references<cr>", { desc = "References" })
-vim.keymap.set("n", "<leader>li", ":Telescope lsp_implementations<cr>", { desc = "Implementations" })
 vim.keymap.set("n", "<leader>ld", ":Telescope lsp_definitions<cr>", { desc = "Definitions" })
 vim.keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<cr>", { desc = "Format" })
+vim.keymap.set("n", "<leader>lp", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek definition" })
+vim.keymap.set("n", "<leader>lg", "<cmd>Lspsaga hover_doc<cr>", { desc = "Peek definition" })
 
 -- Window
 vim.keymap.set("n", "<C-j>", "<C-w>j", { remap = true })
