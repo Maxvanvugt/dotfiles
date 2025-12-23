@@ -24,4 +24,27 @@ function M.toggle_cursor_word()
 	vim.g.minicursorword_disable = not vim.g.minicursorword_disable
 end
 
+function M.toggle_checkbox()
+    local original_pos = vim.api.nvim_win_get_cursor(0)
+
+    vim.cmd("normal 0wl")
+
+    local line = vim.fn.getline('.')
+    local col = vim.fn.col('.')
+    local char = line:sub(col, col)
+
+    if char == 'x' then
+        vim.cmd("normal r ")
+    else
+        vim.cmd("normal rx")
+    end
+
+    vim.api.nvim_win_set_cursor(0, original_pos)
+end
+
+function M.new_checkbox()
+	vim.cmd("normal o- [ ]  ")
+	vim.cmd("startinsert")
+end
+
 return M

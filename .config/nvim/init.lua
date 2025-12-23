@@ -44,7 +44,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
-
 -- Navigate tabs
 vim.keymap.set("n", "<TAB>", "]b", { remap = true, desc = "Next tab" })
 vim.keymap.set("n", "<S-TAB>", "[b", { remap = true, desc = "Previous tab" })
@@ -103,3 +102,7 @@ vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>", { desc = "Open
 vim.keymap.set("v", ";", "<cmd>lua vim.cmd('normal iq')<cr>", { desc = "Move to next quotes when in visual mode" })
 vim.keymap.set("v", ".", "<cmd>lua vim.cmd('normal ia')<cr>", { desc = "Move to next argument when in visual mode" })
 vim.keymap.set("n", "<leader>m", require("core.functions").toggle_cursor_word, { desc = "Toggle cursor word" })
+
+-- Checkbox
+vim.keymap.set("n", "<leader>xn", require("core.functions").new_checkbox, { desc = "New checkbox" })
+vim.keymap.set("n", "<leader>xx", require("core.functions").toggle_checkbox, { desc = "Toggle checkbox" })
