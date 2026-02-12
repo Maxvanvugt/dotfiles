@@ -47,4 +47,11 @@ function M.new_checkbox()
 	vim.cmd("startinsert")
 end
 
+function M.make_mark()
+    local mark = vim.fn.input("Enter mark letter: ")
+    if mark ~= "" then
+      vim.cmd("normal! m" .. mark)
+    end
+end
+
 return M

@@ -19,6 +19,7 @@ vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.swapfile = false
+vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.clipboard = "unnamedplus"
@@ -64,6 +65,7 @@ vim.keymap.set("n", "<leader>ld", ":Telescope lsp_definitions<cr>", { desc = "De
 vim.keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<cr>", { desc = "Format" })
 vim.keymap.set("n", "<leader>lp", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek definition" })
 vim.keymap.set("n", "<leader>lg", "<cmd>Lspsaga hover_doc<cr>", { desc = "Peek definition" })
+vim.keymap.set("n", "<leader>ll", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Show diagnostic" })
 
 -- Window
 vim.keymap.set("n", "<C-j>", "<C-w>j", { remap = true })
@@ -98,7 +100,7 @@ vim.keymap.set("n", "<leader>fg", ":Telescope git_status<cr>", { desc = "Git sta
 vim.keymap.set("n", ";", "<cmd>lua require('flash').jump()<cr>", { desc = "Goto word", remap = true, nowait = true })
 vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<cr>", { desc = "Remove highlight search" })
 vim.keymap.set("n", "m", ":write<CR>", { desc = "Write file" })
-vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>", { desc = "Open explorer", remap = true })
+vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", { desc = "Open explorer", remap = true })
 vim.keymap.set("v", ";", "<cmd>lua vim.cmd('normal iq')<cr>", { desc = "Move to next quotes when in visual mode" })
 vim.keymap.set("v", ".", "<cmd>lua vim.cmd('normal ia')<cr>", { desc = "Move to next argument when in visual mode" })
 vim.keymap.set("n", "<leader>m", require("core.functions").toggle_cursor_word, { desc = "Toggle cursor word" })
@@ -106,3 +108,21 @@ vim.keymap.set("n", "<leader>m", require("core.functions").toggle_cursor_word, {
 -- Checkbox
 vim.keymap.set("n", "<leader>xn", require("core.functions").new_checkbox, { desc = "New checkbox" })
 vim.keymap.set("n", "<leader>xx", require("core.functions").toggle_checkbox, { desc = "Toggle checkbox" })
+
+vim.keymap.set("n", "<leader>mm", require("core.functions").make_mark, { desc = "Make mark" })
+
+require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    "typescript",
+    "html",
+    "css",
+    "scss",
+    "javascript",
+  },
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  },
+}
