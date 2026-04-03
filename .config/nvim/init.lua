@@ -1,8 +1,12 @@
-require("core.lazy")
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+require("core.pack")
+require("core.plugin_config")
 
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("angularls")
--- vim.lsp.enable("lua_ls")
+vim.lsp.enable("lua_ls")
 
 vim.cmd("colorscheme tokyonight-night")
 vim.cmd("set ignorecase")
@@ -116,19 +120,3 @@ vim.keymap.set("n", "<leader>ml", "<cmd>Telescope marks<cr>", { desc = "List mar
 -- Toggle
 vim.keymap.set("n", "<leader>tw", require("core.functions").toggle_wrap, { desc = "Toggle wrap" })
 vim.keymap.set("n", "<leader>tn", require("core.functions").toggle_relative_number, { desc = "Toggle relative number" })
-
-require('nvim-treesitter.configs').setup {
-  ensure_installed = {
-    "typescript",
-    "html",
-    "css",
-    "scss",
-    "javascript",
-  },
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-}
