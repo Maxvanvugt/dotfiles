@@ -8,5 +8,13 @@ export PATH=/home/max/.local/bin:/snap/bin:$PATH
 eval "$(oh-my-posh init zsh --config ~/posh-theme.omp.json)"
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR=lvim
-export VISUAL=lvim
+# export EDITOR=lvim
+# export VISUAL=lvim
+
+[[ -s "/home/max/.sdkman/bin/sdkman-init.sh" ]] && source "/home/max/.sdkman/bin/sdkman-init.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+setopt EXTENDED_HISTORY
