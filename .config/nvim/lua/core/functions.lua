@@ -54,4 +54,12 @@ function M.make_mark()
     end
 end
 
+function M.toggle_wrap()
+    vim.opt.wrap = not vim.opt.wrap:get()
+end
+
+function M.toggle_relative_number()
+    vim.opt.relativenumber = not vim.opt.relativenumber:get()
+end
+
 return M

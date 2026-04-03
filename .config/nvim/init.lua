@@ -109,7 +109,13 @@ vim.keymap.set("n", "<leader>m", require("core.functions").toggle_cursor_word, {
 vim.keymap.set("n", "<leader>xn", require("core.functions").new_checkbox, { desc = "New checkbox" })
 vim.keymap.set("n", "<leader>xx", require("core.functions").toggle_checkbox, { desc = "Toggle checkbox" })
 
+-- Marks
 vim.keymap.set("n", "<leader>mm", require("core.functions").make_mark, { desc = "Make mark" })
+vim.keymap.set("n", "<leader>ml", "<cmd>Telescope marks<cr>", { desc = "List marks" })
+
+-- Toggle
+vim.keymap.set("n", "<leader>tw", require("core.functions").toggle_wrap, { desc = "Toggle wrap" })
+vim.keymap.set("n", "<leader>tn", require("core.functions").toggle_relative_number, { desc = "Toggle relative number" })
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
