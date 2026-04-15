@@ -28,7 +28,7 @@ require("flash").setup({})
 
 require("mason").setup({})
 
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter").setup({
     ensure_installed = {
         "typescript",
         "html",
@@ -59,7 +59,6 @@ require("mini.pick").setup()
 require("mini.statusline").setup()
 require("mini.indentscope").setup()
 require("mini.align").setup()
-require("mini.cursorword").setup()
 
 require("mini.sessions").setup({
     directory = "~/.local/state/nvim/sessions",

@@ -5,7 +5,8 @@ vim.pack.add({
     { src = "https://github.com/folke/tokyonight.nvim" },
     {
         src = "https://github.com/nvim-treesitter/nvim-treesitter",
-        version = "v0.10.0",
+        -- Legacy master/v0.10 line is incompatible with Nvim 0.12 (markdown fenced blocks / injections).
+        version = "main",
     },
     { src = "https://github.com/nvim-mini/mini.nvim" },
     {
@@ -20,6 +21,7 @@ vim.pack.add({
     { src = "https://github.com/folke/lazydev.nvim" },
     { src = "https://github.com/folke/flash.nvim" },
     { src = "https://github.com/mason-org/mason.nvim" },
+    { src = "https://github.com/jake-stewart/multicursor.nvim" },
 }, { load = true, confirm = false })
 
 -- After install/update of nvim-treesitter, refresh parsers (replaces lazy.nvim `build = :TSUpdate`).

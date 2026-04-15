@@ -1,6 +1,42 @@
 local M = {}
 local notify = vim.notify
 
+function M.multicursor_match_add_prev()
+	require("multicursor-nvim").matchAddCursor(-1)
+end
+
+function M.multicursor_match_add_next()
+	require("multicursor-nvim").matchAddCursor(1)
+end
+
+function M.multicursor_match_skip_prev()
+	require("multicursor-nvim").matchSkipCursor(-1)
+end
+
+function M.multicursor_match_skip_next()
+	require("multicursor-nvim").matchSkipCursor(1)
+end
+
+function M.multicursor_prev_cursor()
+	require("multicursor-nvim").prevCursor()
+end
+
+function M.multicursor_next_cursor()
+	require("multicursor-nvim").nextCursor()
+end
+
+function M.multicursor_delete_cursor()
+	require("multicursor-nvim").deleteCursor()
+end
+
+function M.multicursor_toggle_cursors_escape()
+	if not require("multicursor-nvim").cursorsEnabled() then
+		require("multicursor-nvim").enableCursors()
+	else
+		require("multicursor-nvim").clearCursors()
+	end
+end
+
 function M.close_other_buffers()
 	local current_buf = vim.api.nvim_get_current_buf()
 	local all_bufs = vim.api.nvim_list_bufs()

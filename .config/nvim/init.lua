@@ -6,7 +6,7 @@ require("core.plugin_config")
 
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("angularls")
-vim.lsp.enable("lua_ls")
+-- vim.lsp.enable("lua_ls")
 
 vim.cmd("colorscheme tokyonight-night")
 vim.cmd("set ignorecase")
@@ -108,6 +108,10 @@ vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_n
 vim.keymap.set("v", ";", "<cmd>lua vim.cmd('normal iq')<cr>", { desc = "Move to next quotes when in visual mode" })
 vim.keymap.set("v", ".", "<cmd>lua vim.cmd('normal ia')<cr>", { desc = "Move to next argument when in visual mode" })
 vim.keymap.set("n", "<leader>m", require("core.functions").toggle_cursor_word, { desc = "Toggle cursor word" })
+vim.keymap.set("n", "\'", "ciw", { desc = "Change inside word" })
+vim.keymap.set("n", "\"", "diw", { desc = "Delete inside word" })
+vim.keymap.set("n", "z", "V", { desc = "Visual select line" })
+vim.keymap.set("n", "[", "viw", { desc = "Visual Select inside word", noremap = true, silent = true, nowait = true })
 
 -- Checkbox
 vim.keymap.set("n", "<leader>xn", require("core.functions").new_checkbox, { desc = "New checkbox" })
@@ -120,3 +124,20 @@ vim.keymap.set("n", "<leader>ml", "<cmd>Telescope marks<cr>", { desc = "List mar
 -- Toggle
 vim.keymap.set("n", "<leader>tw", require("core.functions").toggle_wrap, { desc = "Toggle wrap" })
 vim.keymap.set("n", "<leader>tn", require("core.functions").toggle_relative_number, { desc = "Toggle relative number" })
+
+-- Multicursor
+vim.keymap.set("n", "<up>", require("core.functions").multicursor_match_add_prev, { desc = "Multicursor match add up" })
+vim.keymap.set("n", "<down>", require("core.functions").multicursor_match_add_next, { desc = "Multicursor match add down" })
+vim.keymap.set("n", "<c-up>", require("core.functions").multicursor_match_skip_prev, { desc = "Multicursor skip up" })
+vim.keymap.set("n", "<c-down>", require("core.functions").multicursor_match_skip_next, { desc = "Multicursor skip down" })
+
+local mc = require("multicursor-nvim")
+mc.setup()
+
+mc.addKeymapLayer(function(layerSet)
+	layerSet({ "n", "x" }, "<left>", require("core.functions").multicursor_prev_cursor)
+	layerSet({ "n", "x" }, "<right>", require("core.functions").multicursor_next_cursor)
+	layerSet({ "n", "x" }, "<leader>x", require("core.functions").multicursor_delete_cursor)
+	layerSet("n", "<esc>", require("core.functions").multicursor_toggle_cursors_escape)
+end)
+
