@@ -25,7 +25,7 @@ vim.pack.add({
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/sindrets/diffview.nvim" },
     { src = "https://github.com/tpope/vim-fugitive" },
-
+    { src = "https://github.com/f-person/git-blame.nvim" },
 }, { load = true, confirm = false })
 
 -- After install/update of nvim-treesitter, refresh parsers (replaces lazy.nvim `build = :TSUpdate`).

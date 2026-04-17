@@ -92,6 +92,9 @@ vim.keymap.set("n", "<leader>gn", "<cmd>lua MiniDiff.goto_hunk('next')<cr>", { d
 vim.keymap.set("n", "<leader>gp", "<cmd>lua MiniDiff.goto_hunk('prev')<cr>", { desc = "Goto previous hunk", remap = true })
 vim.keymap.set("n", "<leader>gg", "<cmd>lua Snacks.lazygit()<cr>", { desc = "Open lazygit", remap = true })
 
+-- Diff
+vim.keymap.set("n", "<leader>gl", require("core.functions").diff_blame, { desc = "Diff blame" })
+
 -- Close
 vim.keymap.set("n", "<leader>co", require("core.functions").close_other_buffers, { desc = "Close other buffers" })
 vim.keymap.set("n", "<leader>cc", "<cmd>lua MiniBufremove.delete()<cr>", { desc = "Close current buffer" })
