@@ -9,7 +9,6 @@ vim.lsp.enable("angularls")
 -- vim.lsp.enable("lua_ls")
 
 vim.cmd("colorscheme tokyonight-night")
-vim.cmd("set ignorecase")
 
 vim.notify = require("core.functions").notify
 
