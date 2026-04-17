@@ -23,6 +23,8 @@ vim.pack.add({
     { src = "https://github.com/mason-org/mason.nvim" },
     { src = "https://github.com/jake-stewart/multicursor.nvim" },
     { src = "https://github.com/stevearc/oil.nvim" },
+    { src = "https://github.com/sindrets/diffview.nvim" },
+
 }, { load = true, confirm = false })
 
 -- After install/update of nvim-treesitter, refresh parsers (replaces lazy.nvim `build = :TSUpdate`).

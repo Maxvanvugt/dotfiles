@@ -2,61 +2,61 @@ local M = {}
 local notify = vim.notify
 
 function M.multicursor_match_add_prev()
-	require("multicursor-nvim").matchAddCursor(-1)
+    require("multicursor-nvim").matchAddCursor(-1)
 end
 
 function M.multicursor_match_add_next()
-	require("multicursor-nvim").matchAddCursor(1)
+    require("multicursor-nvim").matchAddCursor(1)
 end
 
 function M.multicursor_match_skip_prev()
-	require("multicursor-nvim").matchSkipCursor(-1)
+    require("multicursor-nvim").matchSkipCursor(-1)
 end
 
 function M.multicursor_match_skip_next()
-	require("multicursor-nvim").matchSkipCursor(1)
+    require("multicursor-nvim").matchSkipCursor(1)
 end
 
 function M.multicursor_prev_cursor()
-	require("multicursor-nvim").prevCursor()
+    require("multicursor-nvim").prevCursor()
 end
 
 function M.multicursor_next_cursor()
-	require("multicursor-nvim").nextCursor()
+    require("multicursor-nvim").nextCursor()
 end
 
 function M.multicursor_delete_cursor()
-	require("multicursor-nvim").deleteCursor()
+    require("multicursor-nvim").deleteCursor()
 end
 
 function M.multicursor_toggle_cursors_escape()
-	if not require("multicursor-nvim").cursorsEnabled() then
-		require("multicursor-nvim").enableCursors()
-	else
-		require("multicursor-nvim").clearCursors()
-	end
+    if not require("multicursor-nvim").cursorsEnabled() then
+        require("multicursor-nvim").enableCursors()
+    else
+        require("multicursor-nvim").clearCursors()
+    end
 end
 
 function M.close_other_buffers()
-	local current_buf = vim.api.nvim_get_current_buf()
-	local all_bufs = vim.api.nvim_list_bufs()
+    local current_buf = vim.api.nvim_get_current_buf()
+    local all_bufs = vim.api.nvim_list_bufs()
 
-	for _, buf in ipairs(all_bufs) do
-		if buf ~= current_buf and vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_option(buf, "buflisted") then
-			require("mini.bufremove").delete(buf, false)
-		end
-	end
+    for _, buf in ipairs(all_bufs) do
+        if buf ~= current_buf and vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_option(buf, "buflisted") then
+            require("mini.bufremove").delete(buf, false)
+        end
+    end
 end
 
 function M.notify(msg, level, opts)
-	if level == vim.log.levels.DEBUG then
-		return
-	end
-	notify(msg, level, opts)
+    if level == vim.log.levels.DEBUG then
+        return
+    end
+    notify(msg, level, opts)
 end
 
 function M.toggle_cursor_word()
-	vim.g.minicursorword_disable = not vim.g.minicursorword_disable
+    vim.g.minicursorword_disable = not vim.g.minicursorword_disable
 end
 
 function M.toggle_checkbox()
@@ -78,14 +78,14 @@ function M.toggle_checkbox()
 end
 
 function M.new_checkbox()
-	vim.cmd("normal o- [ ]  ")
-	vim.cmd("startinsert")
+    vim.cmd("normal o- [ ]  ")
+    vim.cmd("startinsert")
 end
 
 function M.make_mark()
     local mark = vim.fn.input("Enter mark letter: ")
     if mark ~= "" then
-      vim.cmd("normal! m" .. mark)
+        vim.cmd("normal! m" .. mark)
     end
 end
 
@@ -119,6 +119,19 @@ function M.telescope_grep_component()
     require("telescope.builtin").live_grep({
         glob_pattern = "*.component.ts",
     })
+end
+
+-- Get the last commit that touched the current line, then diff against it
+function M.gitsings_diff_current_line()
+    local line = vim.fn.line('.')
+    local file = vim.fn.expand('%')
+    -- Get the commit hash for the last change on this line
+    local commit = vim.fn.system(
+        string.format('git log -1 --pretty=format:%%H -L %d,%d:%s', line, line, file)
+    ):match('^(%x+)')
+    if commit and #commit > 0 then
+        require('gitsigns').diffthis(commit)
+    end
 end
 
 return M

@@ -4,6 +4,10 @@
       "rev": "62a10d9d55132b338dd742afc3c8a2683f3dd426",
       "src": "https://github.com/nvimdev/dashboard-nvim"
     },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "flash.nvim": {
       "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
       "src": "https://github.com/folke/flash.nvim"
