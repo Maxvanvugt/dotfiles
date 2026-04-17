@@ -121,17 +121,4 @@ function M.telescope_grep_component()
     })
 end
 
--- Get the last commit that touched the current line, then diff against it
-function M.gitsings_diff_current_line()
-    local line = vim.fn.line('.')
-    local file = vim.fn.expand('%')
-    -- Get the commit hash for the last change on this line
-    local commit = vim.fn.system(
-        string.format('git log -1 --pretty=format:%%H -L %d,%d:%s', line, line, file)
-    ):match('^(%x+)')
-    if commit and #commit > 0 then
-        require('gitsigns').diffthis(commit)
-    end
-end
-
 return M

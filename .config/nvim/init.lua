@@ -91,7 +91,6 @@ vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<cr>", { d
 vim.keymap.set("n", "<leader>gn", "<cmd>lua MiniDiff.goto_hunk('next')<cr>", { desc = "Goto next hunk", remap = true })
 vim.keymap.set("n", "<leader>gp", "<cmd>lua MiniDiff.goto_hunk('prev')<cr>", { desc = "Goto previous hunk", remap = true })
 vim.keymap.set("n", "<leader>gg", "<cmd>lua Snacks.lazygit()<cr>", { desc = "Open lazygit", remap = true })
-vim.keymap.set("n", "<leader>gc", require("core.functions").gitsings_diff_current_line, { desc = "Diff current line", remap = true })
 
 -- Close
 vim.keymap.set("n", "<leader>co", require("core.functions").close_other_buffers, { desc = "Close other buffers" })
