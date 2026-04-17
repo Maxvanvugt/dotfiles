@@ -26,6 +26,21 @@ require("snacks").setup({
 
 require("flash").setup({})
 
+require("diffview").setup({
+    hooks = {
+        diff_buf_read = function(bufnr)
+            vim.api.nvim_buf_call(bufnr, function()
+                vim.opt_local.foldenable = false
+            end)
+        end,
+        diff_buf_win_enter = function(bufnr, _, _)
+            vim.api.nvim_buf_call(bufnr, function()
+                vim.opt_local.foldenable = false
+            end)
+        end,
+    },
+})
+
 require("oil").setup()
 
 require("mason").setup({})

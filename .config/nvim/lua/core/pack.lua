@@ -24,6 +24,7 @@ vim.pack.add({
     { src = "https://github.com/jake-stewart/multicursor.nvim" },
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/sindrets/diffview.nvim" },
+    { src = "https://github.com/tpope/vim-fugitive" },
 
 }, { load = true, confirm = false })
 
