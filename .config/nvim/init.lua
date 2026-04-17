@@ -94,6 +94,7 @@ vim.keymap.set("n", "<leader>gg", "<cmd>lua Snacks.lazygit()<cr>", { desc = "Ope
 
 -- Diff
 vim.keymap.set("n", "<leader>gl", require("core.functions").diff_blame, { desc = "Diff blame" })
+vim.keymap.set("n", "<leader>gH", require("core.functions").diff_blame_to_head, { desc = "Diff blame to HEAD" })
 
 -- Close
 vim.keymap.set("n", "<leader>co", require("core.functions").close_other_buffers, { desc = "Close other buffers" })

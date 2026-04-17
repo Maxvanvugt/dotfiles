@@ -121,16 +121,33 @@ function M.telescope_grep_component()
     })
 end
 
-function M.diff_blame()
+local function line_blame_commit_hash()
     local result = vim.fn.system(
         "git log -1 --format=%H -L " .. vim.fn.line(".") .. "," .. vim.fn.line(".") .. ":" .. vim.fn.expand("%")
     )
     local hash = result:match("^(%x%x%x%x%x%x%x%x)")
     if not hash then
-        vim.notify("Could not get commit hash: " .. result, vim.log.levels.ERROR)
+        return nil, result
+    end
+    return hash
+end
+
+function M.diff_blame()
+    local hash, err = line_blame_commit_hash()
+    if not hash then
+        vim.notify("Could not get commit hash: " .. err, vim.log.levels.ERROR)
         return
     end
     vim.cmd("DiffviewFileHistory --range=" .. hash .. "~.." .. hash)
+end
+
+function M.diff_blame_to_head()
+    local hash, err = line_blame_commit_hash()
+    if not hash then
+        vim.notify("Could not get commit hash: " .. err, vim.log.levels.ERROR)
+        return
+    end
+    vim.cmd("DiffviewFileHistory --base=" .. hash)
 end
 
 
