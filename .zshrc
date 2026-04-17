@@ -1,5 +1,6 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+source ~/.secrets
 
 plugins=(git zsh-autocomplete fzf zsh-autosuggestions)
 
