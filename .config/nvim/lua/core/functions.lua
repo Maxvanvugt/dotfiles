@@ -49,8 +49,7 @@ function M.close_other_buffers()
 end
 
 function M.notify(msg, level, opts)
-	-- Only show errors (vim.log.levels.ERROR)
-	if level ~= vim.log.levels.ERROR then
+	if level == vim.log.levels.DEBUG then
 		return
 	end
 	notify(msg, level, opts)

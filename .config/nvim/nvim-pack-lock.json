@@ -12,6 +12,14 @@
       "rev": "944ef13cc8d8fe8b846c91f36041c8dfb85ca000",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
+    "jira-oil.nvim": {
+      "rev": "3c0bb6be4098e5815a815f4b38f57fda2d200116",
+      "src": "https://github.com/sbulav/jira-oil.nvim"
+    },
+    "jira.nvim": {
+      "rev": "43916036b84966cbda196673b73a848f6f51cc12",
+      "src": "https://codeberg.org/l-lin/jira.nvim"
+    },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"

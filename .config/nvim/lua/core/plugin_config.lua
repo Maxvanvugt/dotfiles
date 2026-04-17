@@ -32,6 +32,7 @@ require("mason").setup({})
 
 require("nvim-treesitter").setup({
     ensure_installed = {
+        "lua",
         "typescript",
         "html",
         "css",
@@ -84,6 +85,9 @@ require("mini.clue").setup({
         { mode = "n", keys = "<leader>l", desc = "LSP" },
         { mode = "n", keys = "<leader>c", desc = "Close" },
         { mode = "n", keys = "<leader>f", desc = "Find" },
+        { mode = "n", keys = "<leader>x", desc = "Checkbox" },
+        { mode = "n", keys = "<leader>t", desc = "Toggle" },
+        { mode = "n", keys = "<leader>e", desc = "Explorer" },
     },
 })
 

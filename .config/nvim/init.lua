@@ -29,6 +29,8 @@ vim.opt.shiftwidth = 4
 vim.opt.clipboard = "unnamedplus"
 vim.opt.hidden = true
 vim.opt.termguicolors = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.diagnostic.config({
 	virtual_text = true,
@@ -54,8 +56,8 @@ vim.keymap.set("n", "<TAB>", "]b", { remap = true, desc = "Next tab" })
 vim.keymap.set("n", "<S-TAB>", "[b", { remap = true, desc = "Previous tab" })
 
 -- Move lines
-vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true, desc = "Move lines to right" })
-vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true, desc = "Move lines to left" })
+vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true, desc = "Decrease indent" })
+vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true, desc = "Increase indent" })
 
 -- Toggle comment
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
@@ -68,7 +70,7 @@ vim.keymap.set("n", "<leader>lh", ":Telescope lsp_references<cr>", { desc = "Ref
 vim.keymap.set("n", "<leader>ld", ":Telescope lsp_definitions<cr>", { desc = "Definitions" })
 vim.keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<cr>", { desc = "Format" })
 vim.keymap.set("n", "<leader>lp", "<cmd>Lspsaga peek_definition<cr>", { desc = "Peek definition" })
-vim.keymap.set("n", "<leader>lg", "<cmd>Lspsaga hover_doc<cr>", { desc = "Peek definition" })
+vim.keymap.set("n", "<leader>lg", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover documentation" })
 vim.keymap.set("n", "<leader>ll", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Show diagnostic" })
 
 -- Window
