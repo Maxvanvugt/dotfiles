@@ -26,6 +26,8 @@ require("snacks").setup({
 
 require("flash").setup({})
 
+require("oil").setup()
+
 require("mason").setup({})
 
 require("nvim-treesitter").setup({
