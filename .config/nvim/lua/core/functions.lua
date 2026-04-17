@@ -98,4 +98,28 @@ function M.toggle_relative_number()
     vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end
 
+function M.telescope_grep_ts()
+    require("telescope.builtin").live_grep({
+        glob_pattern = "*.ts",
+    })
+end
+
+function M.telescope_grep_json()
+    require("telescope.builtin").live_grep({
+        glob_pattern = "*.json",
+    })
+end
+
+function M.telescope_grep_html()
+    require("telescope.builtin").live_grep({
+        glob_pattern = "*.html",
+    })
+end
+
+function M.telescope_grep_component()
+    require("telescope.builtin").live_grep({
+        glob_pattern = "*.component.ts",
+    })
+end
+
 return M

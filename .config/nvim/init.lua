@@ -86,6 +86,7 @@ vim.keymap.set("v", "]", [[c[]<esc>P]], { desc = "Wrap in square brackets", nowa
 
 -- Git
 vim.keymap.set("n", "<leader>gt", "<cmd>lua MiniDiff.toggle_overlay()<cr>", { desc = "Toggle diff overlay", remap = true })
+vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<cr>", { desc = "Toggle blame", remap = true })
 vim.keymap.set("n", "<leader>gn", "<cmd>lua MiniDiff.goto_hunk('next')<cr>", { desc = "Goto next hunk", remap = true })
 vim.keymap.set("n", "<leader>gp", "<cmd>lua MiniDiff.goto_hunk('prev')<cr>", { desc = "Goto previous hunk", remap = true })
 vim.keymap.set("n", "<leader>gg", "<cmd>lua Snacks.lazygit()<cr>", { desc = "Open lazygit", remap = true })
@@ -99,6 +100,10 @@ vim.keymap.set("n", "<leader>cw", "<cmd>close<cr>", { desc = "Close current wind
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<cr>", { desc = "Find files" })
 vim.keymap.set("n", "<leader>fd", ":Telescope live_grep<cr>", { desc = "Live grep" })
 vim.keymap.set("n", "<leader>fg", ":Telescope git_status<cr>", { desc = "Git status" })
+vim.keymap.set("n", "<leader>ft", require("core.functions").telescope_grep_ts, { desc = "Grep TS" })
+vim.keymap.set("n", "<leader>fj", require("core.functions").telescope_grep_json, { desc = "Grep Json" })
+vim.keymap.set("n", "<leader>fh", require("core.functions").telescope_grep_html, { desc = "Grep HTML" })
+vim.keymap.set("n", "<leader>fc", require("core.functions").telescope_grep_component, { desc = "Grep Component" })
 
 -- Other
 vim.keymap.set("n", ";", "<cmd>lua require('flash').jump()<cr>", { desc = "Goto word", remap = true, nowait = true })
@@ -110,8 +115,6 @@ vim.keymap.set("v", ".", "<cmd>lua vim.cmd('normal ia')<cr>", { desc = "Move to 
 vim.keymap.set("n", "<leader>m", require("core.functions").toggle_cursor_word, { desc = "Toggle cursor word" })
 vim.keymap.set("n", "\'", "ciw", { desc = "Change inside word" })
 vim.keymap.set("n", "\"", "diw", { desc = "Delete inside word" })
-vim.keymap.set("n", "z", "V", { desc = "Visual select line" })
-vim.keymap.set("n", "[", "viw", { desc = "Visual Select inside word", noremap = true, silent = true, nowait = true })
 
 -- Checkbox
 vim.keymap.set("n", "<leader>xn", require("core.functions").new_checkbox, { desc = "New checkbox" })
@@ -130,6 +133,9 @@ vim.keymap.set("n", "<up>", require("core.functions").multicursor_match_add_prev
 vim.keymap.set("n", "<down>", require("core.functions").multicursor_match_add_next, { desc = "Multicursor match add down" })
 vim.keymap.set("n", "<c-up>", require("core.functions").multicursor_match_skip_prev, { desc = "Multicursor skip up" })
 vim.keymap.set("n", "<c-down>", require("core.functions").multicursor_match_skip_next, { desc = "Multicursor skip down" })
+
+vim.keymap.set('n', '<Leader>,', ':%s/\\<<C-r><C-w>\\>//gc<Left><Left><Left>')
+vim.keymap.set('v', '<Leader>,', '"zy:,$s/<C-r>z//gc<Left><Left><Left>')
 
 local mc = require("multicursor-nvim")
 mc.setup()
