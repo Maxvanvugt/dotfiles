@@ -68,6 +68,10 @@
       "rev": "1a66cabaa4a4da0be107d5eda6d57242f0fe7e49",
       "src": "https://github.com/rcarriga/nvim-dap-ui"
     },
+    "nvim-dap-view": {
+      "rev": "03c22bb2bc0d6ed60ee6f7351f8a5e65dd2e80d3",
+      "src": "https://github.com/igorlfs/nvim-dap-view"
+    },
     "nvim-dap-vscode-js": {
       "rev": "03bd29672d7fab5e515fc8469b7d07cc5994bbf6",
       "src": "https://github.com/mxsdev/nvim-dap-vscode-js"
