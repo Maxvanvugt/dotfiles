@@ -100,6 +100,7 @@ vim.keymap.set("n", "<leader>gH", require("core.functions").diff_blame_to_head, 
 vim.keymap.set("n", "<leader>co", require("core.functions").close_other_buffers, { desc = "Close other buffers" })
 vim.keymap.set("n", "<leader>cc", "<cmd>lua MiniBufremove.delete()<cr>", { desc = "Close current buffer" })
 vim.keymap.set("n", "<leader>cw", "<cmd>close<cr>", { desc = "Close current window" })
+vim.keymap.set("n", "<leader>cs", "<cmd>only<cr>", { desc = "Close other windows" })
 
 -- Telescope
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<cr>", { desc = "Find files" })

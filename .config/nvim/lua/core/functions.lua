@@ -138,7 +138,7 @@ function M.diff_blame()
         vim.notify("Could not get commit hash: " .. err, vim.log.levels.ERROR)
         return
     end
-    vim.cmd("DiffviewFileHistory --range=" .. hash .. "~.." .. hash)
+    vim.cmd("DiffviewFileHistory --range=" .. hash .. "~.." .. hash .. " %")
 end
 
 function M.diff_blame_to_head()
