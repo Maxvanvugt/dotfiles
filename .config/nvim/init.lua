@@ -1,6 +1,19 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+vim.filetype.add({
+    pattern = {
+        [".*%.component%.html"] = "htmlangular",
+    },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "htmlangular",
+    callback = function(ev)
+        vim.treesitter.start(ev.buf)
+    end,
+})
+
 require("core.pack")
 require("core.plugin_config")
 
@@ -26,6 +39,7 @@ vim.opt.swapfile = false
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.fixendofline = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.hidden = true
 vim.opt.termguicolors = true
