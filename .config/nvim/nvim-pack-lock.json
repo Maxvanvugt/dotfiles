@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "coc.nvim": {
+      "rev": "8bc40fab40f0d0d2779c761a8f099646d879676c",
+      "src": "https://github.com/neoclide/coc.nvim"
+    },
     "dashboard-nvim": {
       "rev": "62a10d9d55132b338dd742afc3c8a2683f3dd426",
       "src": "https://github.com/nvimdev/dashboard-nvim"
@@ -51,6 +55,10 @@
     "multicursor.nvim": {
       "rev": "704b99f10a72cc05d370cfeb294ff83412a8ab55",
       "src": "https://github.com/jake-stewart/multicursor.nvim"
+    },
+    "nvim-lspconfig": {
+      "rev": "4b7fbaa239c5db6b36f424a4521ca9f1a401be33",
+      "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tree.lua": {
       "rev": "d277467fc0d1d0e2bca88165a1de6b526f9f6fe8",

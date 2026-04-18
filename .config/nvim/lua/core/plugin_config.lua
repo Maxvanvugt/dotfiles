@@ -53,6 +53,7 @@ require("mason").setup({})
 require("nvim-treesitter").setup({
     ensure_installed = {
         "lua",
+        "angular",
         "typescript",
         "html",
         "css",
