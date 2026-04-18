@@ -158,5 +158,4 @@ function M.diff_blame_to_head()
     vim.cmd("DiffviewFileHistory --base=" .. hash)
 end
 
-
 return M
