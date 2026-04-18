@@ -132,6 +132,14 @@ local function line_blame_commit_hash()
     return hash
 end
 
+function M.toggle_tree_focus()
+    if vim.fn.bufname():match 'NvimTree_' then
+        vim.cmd.wincmd 'p'
+    else
+        vim.cmd("NvimTreeFocus")
+    end
+end
+
 function M.diff_blame()
     local hash, err = line_blame_commit_hash()
     if not hash then
