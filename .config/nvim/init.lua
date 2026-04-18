@@ -6,6 +6,7 @@ require("core.plugin_config")
 
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("angularls")
+vim.lsp.enable("cssls")
 -- vim.lsp.enable("lua_ls")
 
 vim.cmd("colorscheme tokyonight-night")
