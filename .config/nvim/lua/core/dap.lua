@@ -8,6 +8,29 @@ if vim.fn.executable(js_adapter) == 0 and vim.fn.executable("js-debug-adapter") 
     js_adapter = "js-debug-adapter"
 end
 
+-- Stale js-debug-adapter processes often keep the default DAP listen port busy (EADDRINUSE).
+local JS_DEBUG_DAP_PORT = 8123
+
+-- Kill listeners on `port` before spawning js-debug-adapter; no-op if a DAP session exists.
+local function free_stale_js_debug_port(port)
+    if dap.session() then
+        return
+    end
+    port = port or JS_DEBUG_DAP_PORT
+    local sh = string.format(
+        "(command -v fuser >/dev/null 2>&1 && fuser -k %d/tcp >/dev/null 2>&1); "
+            .. "(command -v lsof >/dev/null 2>&1 && PIDS=$(lsof -t -iTCP:%d -sTCP:LISTEN 2>/dev/null) && "
+            .. '[ -n "$PIDS" ] && kill -TERM $PIDS 2>/dev/null); true',
+        port,
+        port
+    )
+    if vim.system then
+        vim.system({ "sh", "-c", sh }, { text = true }):wait()
+    else
+        os.execute(sh)
+    end
+end
+
 -- nvim-dap-vscode-js assumes stdout is only the port number. Current vscode-js-debug prints
 -- a line like "Debug server listening at 127.0.0.1:8123", so nvim-dap's connect() gets
 -- tonumber(adapter.port) == nil → "adapter.port is required". Buffer chunks and parse.
@@ -43,6 +66,7 @@ do
             on_launch(port, proc_ref)
         end
 
+        free_stale_js_debug_port(JS_DEBUG_DAP_PORT)
         return orig_start(config, on_launch_parsed, on_exit, on_error, on_stderror)
     end
 end
