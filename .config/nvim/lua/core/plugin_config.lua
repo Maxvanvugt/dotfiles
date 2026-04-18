@@ -50,6 +50,8 @@ require("oil").setup()
 
 require("mason").setup({})
 
+require("core.dap")
+
 require("nvim-treesitter").setup({
     ensure_installed = {
         "lua",
@@ -103,6 +105,7 @@ require("mini.clue").setup({
     clues = {
         { mode = "n", keys = "<leader>g", desc = "Git" },
         { mode = "n", keys = "<leader>l", desc = "LSP" },
+        { mode = "n", keys = "<leader>d", desc = "Debug (DAP)" },
         { mode = "n", keys = "<leader>c", desc = "Close" },
         { mode = "n", keys = "<leader>f", desc = "Find" },
         { mode = "n", keys = "<leader>x", desc = "Checkbox" },
