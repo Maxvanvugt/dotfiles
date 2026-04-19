@@ -167,6 +167,11 @@ vim.keymap.set("n", "<c-down>", require("core.functions").multicursor_match_skip
 vim.keymap.set('n', '<Leader>,', ':%s/\\<<C-r><C-w>\\>//gc<Left><Left><Left>')
 vim.keymap.set('v', '<Leader>,', '"zy:,$s/<C-r>z//gc<Left><Left><Left>')
 
+vim.keymap.set("n", "<leader>db", ":DapToggleBreakpoint<cr>", { desc = "Toggle breakpoint" })
+vim.keymap.set("n", "<leader>dc", ":DapContinue<cr>", { desc = "Dap continue" })
+vim.keymap.set("n", "<leader>dt", ":DapTerminate<cr>", { desc = "Dap terminate" })
+vim.keymap.set("n", "<leader>dv", ":DapViewToggle<cr>", { desc = "Dap view toggle" })
+
 -- Dap view
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "dap-view", "dap-repl" },
@@ -180,6 +185,7 @@ vim.api.nvim_create_autocmd("FileType", {
         end, { buffer = buf, nowait = true, desc = "DapView previous section" })
     end,
 })
+
 
 local mc = require("multicursor-nvim")
 mc.setup()
