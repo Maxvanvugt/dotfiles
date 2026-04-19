@@ -47,16 +47,16 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.diagnostic.config({
-	virtual_text = true,
-	signs = false,
-	underline = true,
-	update_in_insert = false,
-	severity_sort = true,
-	float = {
-		border = "rounded",
-		header = "",
-		prefix = "",
-	},
+    virtual_text = true,
+    signs = false,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+    float = {
+        border = "rounded",
+        header = "",
+        prefix = "",
+    },
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -167,13 +167,26 @@ vim.keymap.set("n", "<c-down>", require("core.functions").multicursor_match_skip
 vim.keymap.set('n', '<Leader>,', ':%s/\\<<C-r><C-w>\\>//gc<Left><Left><Left>')
 vim.keymap.set('v', '<Leader>,', '"zy:,$s/<C-r>z//gc<Left><Left><Left>')
 
+-- Dap view
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "dap-view", "dap-repl" },
+    callback = function(ev)
+        local buf = ev.buf
+        vim.keymap.set("n", "<Tab>", function()
+            require("dap-view").navigate({ count = vim.v.count1, wrap = true })
+        end, { buffer = buf, nowait = true, desc = "DapView next section" })
+        vim.keymap.set("n", "<S-Tab>", function()
+            require("dap-view").navigate({ count = -vim.v.count1, wrap = true })
+        end, { buffer = buf, nowait = true, desc = "DapView previous section" })
+    end,
+})
+
 local mc = require("multicursor-nvim")
 mc.setup()
 
 mc.addKeymapLayer(function(layerSet)
-	layerSet({ "n", "x" }, "<left>", require("core.functions").multicursor_prev_cursor)
-	layerSet({ "n", "x" }, "<right>", require("core.functions").multicursor_next_cursor)
-	layerSet({ "n", "x" }, "<leader>x", require("core.functions").multicursor_delete_cursor)
-	layerSet("n", "<esc>", require("core.functions").multicursor_toggle_cursors_escape)
+    layerSet({ "n", "x" }, "<left>", require("core.functions").multicursor_prev_cursor)
+    layerSet({ "n", "x" }, "<right>", require("core.functions").multicursor_next_cursor)
+    layerSet({ "n", "x" }, "<leader>x", require("core.functions").multicursor_delete_cursor)
+    layerSet("n", "<esc>", require("core.functions").multicursor_toggle_cursors_escape)
 end)
-
