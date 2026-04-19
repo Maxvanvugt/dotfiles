@@ -4,6 +4,12 @@ require("telescope").setup({
     },
 })
 
+require("dap-view").setup({
+    windows = {
+        position = "right"
+    }
+})
+
 require("lspsaga").setup({
     ui = {
         code_action = "",
