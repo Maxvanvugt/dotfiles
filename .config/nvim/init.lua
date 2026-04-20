@@ -99,6 +99,9 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { remap = true })
 vim.keymap.set("n", "<C-h>", "<C-w>h", { remap = true })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { remap = true })
 
+vim.keymap.set("n", "<C-Left>", "<C-w><", { remap = true })
+vim.keymap.set("n", "<C-Right>", "<C-w>>", { remap = true })
+
 -- Wrap visual selection
 vim.keymap.set("v", "'", [[c''<esc>P]], { desc = "Wrap in single quotes" })
 vim.keymap.set("v", '"', [[c""<esc>P]], { desc = "Wrap in double quotes" })
