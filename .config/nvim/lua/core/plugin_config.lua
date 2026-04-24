@@ -31,11 +31,6 @@ require("snacks").setup({
 })
 
 require("flash").setup({})
-require("nvim-tree").setup({
-    update_focused_file = {
-        enable = true,
-    }
-})
 
 require("diffview").setup({
     hooks = {

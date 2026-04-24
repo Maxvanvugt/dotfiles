@@ -27,7 +27,6 @@ vim.pack.add({
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/sindrets/diffview.nvim" },
     { src = "https://github.com/tpope/vim-fugitive" },
-    { src = "https://github.com/nvim-tree/nvim-tree.lua" },
     { src = 'https://github.com/neovim/nvim-lspconfig' },
 
 }, { load = true, confirm = false })

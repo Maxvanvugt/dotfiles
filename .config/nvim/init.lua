@@ -65,12 +65,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        require("nvim-tree.api").tree.open()
-    end,
-})
-
 -- Navigate tabs
 vim.keymap.set("n", "<TAB>", "]b", { remap = true, desc = "Next tab" })
 vim.keymap.set("n", "<S-TAB>", "[b", { remap = true, desc = "Previous tab" })
@@ -146,8 +140,6 @@ vim.keymap.set("n", "\'", "ciw", { desc = "Change inside word" })
 vim.keymap.set("n", "\"", "diw", { desc = "Delete inside word" })
 
 vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", { desc = "Open explorer", remap = true })
-vim.keymap.set("n", "\\", require("core.functions").toggle_tree_focus, { desc = "Toggle focus file tree" })
-vim.keymap.set("n", "<leader>\\", ":NvimTreeToggle<cr>", { desc = "Toggle file tree" })
 
 -- Checkbox
 vim.keymap.set("n", "<leader>xn", require("core.functions").new_checkbox, { desc = "New checkbox" })
