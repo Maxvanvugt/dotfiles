@@ -149,6 +149,13 @@ vim.keymap.set("n", "<leader>xx", require("core.functions").toggle_checkbox, { d
 vim.keymap.set("n", "<leader>mm", require("core.functions").make_mark, { desc = "Make mark" })
 vim.keymap.set("n", "<leader>ml", "<cmd>Telescope marks<cr>", { desc = "List marks" })
 
+-- Bookmarks
+vim.keymap.set({ "n", "v" }, "<leader>mm", require("core.functions").toggle_bookmark, { desc = "Toggle bookmark" })
+vim.keymap.set({ "n", "v" }, "<leader>ml", "<cmd>BookmarksGoto<cr>", { desc = "Go to bookmark" })
+vim.keymap.set("n", "<leader>mt", "<cmd>BookmarksTree<cr>", { desc = "Bookmark tree" })
+vim.keymap.set("n", "<leader>mk", "<cmd>BookmarksGotoNext<cr>", { desc = "Next bookmark" })
+vim.keymap.set("n", "<leader>mj", "<cmd>BookmarksGotoPrev<cr>", { desc = "Previous bookmark" })
+
 -- Toggle
 vim.keymap.set("n", "<leader>tw", require("core.functions").toggle_wrap, { desc = "Toggle wrap" })
 vim.keymap.set("n", "<leader>tn", require("core.functions").toggle_relative_number, { desc = "Toggle relative number" })
