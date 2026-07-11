@@ -2,6 +2,34 @@ require("telescope").setup({
     defaults = {
         file_ignore_patterns = { "node_modules" },
     },
+    -- exports = {
+    --     bash_scripts = M.bash_scripts
+    -- },
+})
+
+require("bookmarks").setup({
+    picker = {
+        picker_backend = "telescope", -- "snacks" (default) or "telescope"
+        entry_display = function(bookmark)
+            return vim.fn.fnamemodify(bookmark.location.path, ":t")
+        end,
+    },
+    signs = {
+        mark = {
+            icon = "",
+        },
+    },
+    treeview = {
+        render_bookmark = function(node)
+            local location = ""
+            if node.location and node.location.path then
+                local filename = vim.fn.fnamemodify(node.location.path, ":t")
+                location = string.format(" │ %s:%d", filename, node.location.line)
+            end
+
+            return location
+        end,
+    },
 })
 
 require("dap-view").setup({
@@ -112,6 +140,7 @@ require("mini.clue").setup({
         { mode = "n", keys = "<leader>x", desc = "Checkbox" },
         { mode = "n", keys = "<leader>t", desc = "Toggle" },
         { mode = "n", keys = "<leader>e", desc = "Explorer" },
+        { mode = "n", keys = "<leader>b", desc = "Bookmarks" },
     },
 })
 

@@ -16,6 +16,8 @@ vim.pack.add({
     { src = "https://github.com/nvimdev/lspsaga.nvim" },
     { src = "https://github.com/nvimdev/dashboard-nvim" },
     { src = "https://github.com/chentoast/marks.nvim" },
+    { src = "https://github.com/kkharji/sqlite.lua" },
+    { src = "https://github.com/LintaoAmons/bookmarks.nvim" },
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/folke/snacks.nvim" },
     { src = "https://github.com/folke/lazydev.nvim" },

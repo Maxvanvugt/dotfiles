@@ -89,6 +89,29 @@ function M.make_mark()
     end
 end
 
+function M.toggle_bookmark()
+    local Service = require("bookmarks.domain.service")
+    local Node = require("bookmarks.domain.node")
+    local Sign = require("bookmarks.sign")
+
+    local existing = Service.find_bookmark_by_location()
+    if existing then
+        Service.toggle_mark("")
+    else
+        local bookmark = Node.new_bookmark("")
+        local content = bookmark.content or ""
+        -- sqlite.lua treats strings like foo(...) as SQL and inlines them unquoted
+        if content:match("^[%S]+%(.*%)$") then
+            content = content .. " "
+        end
+        bookmark.content = content
+        Service.new_bookmark(bookmark)
+    end
+
+    Sign.safe_refresh_signs()
+    pcall(require("bookmarks.tree.operate").refresh)
+end
+
 function M.toggle_wrap()
     vim.opt.wrap = not vim.opt.wrap:get()
 end

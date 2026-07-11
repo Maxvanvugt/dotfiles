@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "bookmarks.nvim": {
+      "rev": "22c3b6d1392f50bde6d5402c9aa99ac2be061ca3",
+      "src": "https://github.com/LintaoAmons/bookmarks.nvim"
+    },
     "coc.nvim": {
       "rev": "8bc40fab40f0d0d2779c761a8f099646d879676c",
       "src": "https://github.com/neoclide/coc.nvim"
@@ -108,6 +112,10 @@
     "snacks.nvim": {
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
+    },
+    "sqlite.lua": {
+      "rev": "50092d60feb242602d7578398c6eb53b4a8ffe7b",
+      "src": "https://github.com/kkharji/sqlite.lua"
     },
     "telescope.nvim": {
       "rev": "e69b434b968a33815e2f02a5c7bd7b8dd4c7d4b2",
