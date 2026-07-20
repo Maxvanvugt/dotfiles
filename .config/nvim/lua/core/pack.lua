@@ -30,6 +30,8 @@ vim.pack.add({
     { src = "https://github.com/sindrets/diffview.nvim" },
     { src = "https://github.com/tpope/vim-fugitive" },
     { src = 'https://github.com/neovim/nvim-lspconfig' },
+    { src = 'https://github.com/tristone13th/lspmark.nvim' },
+
 
 }, { load = true, confirm = false })
 

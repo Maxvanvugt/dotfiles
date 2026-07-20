@@ -28,6 +28,10 @@
       "rev": "944ef13cc8d8fe8b846c91f36041c8dfb85ca000",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
+    "harpoon": {
+      "rev": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3",
+      "src": "https://github.com/thePrimeagen/harpoon"
+    },
     "jira-oil.nvim": {
       "rev": "3c0bb6be4098e5815a815f4b38f57fda2d200116",
       "src": "https://github.com/sbulav/jira-oil.nvim"
@@ -39,6 +43,10 @@
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
+    },
+    "lspmark.nvim": {
+      "rev": "ecb71753114de61c94c5c5ffc09c0cff9cc04f87",
+      "src": "https://github.com/tristone13th/lspmark.nvim"
     },
     "lspsaga.nvim": {
       "rev": "562d9724e3869ffd1801c572dd149cc9f8d0cc36",

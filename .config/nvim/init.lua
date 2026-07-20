@@ -145,16 +145,13 @@ vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_n
 vim.keymap.set("n", "<leader>xn", require("core.functions").new_checkbox, { desc = "New checkbox" })
 vim.keymap.set("n", "<leader>xx", require("core.functions").toggle_checkbox, { desc = "Toggle checkbox" })
 
--- Marks
-vim.keymap.set("n", "<leader>mm", require("core.functions").make_mark, { desc = "Make mark" })
-vim.keymap.set("n", "<leader>ml", "<cmd>Telescope marks<cr>", { desc = "List marks" })
-
--- Bookmarks
-vim.keymap.set({ "n", "v" }, "<leader>mm", require("core.functions").toggle_bookmark, { desc = "Toggle bookmark" })
-vim.keymap.set({ "n", "v" }, "<leader>ml", "<cmd>BookmarksGoto<cr>", { desc = "Go to bookmark" })
-vim.keymap.set("n", "<leader>mt", "<cmd>BookmarksTree<cr>", { desc = "Bookmark tree" })
-vim.keymap.set("n", "<leader>mk", "<cmd>BookmarksGotoNext<cr>", { desc = "Next bookmark" })
-vim.keymap.set("n", "<leader>mj", "<cmd>BookmarksGotoPrev<cr>", { desc = "Previous bookmark" })
+-- Bookmarks (lspmark)
+vim.keymap.set("n", "<leader>mm", require("core.functions").toggle_bookmark, { desc = "Toggle bookmark" })
+vim.keymap.set("n", "<leader>ml", "<cmd>Telescope lspmark<cr>", { desc = "List bookmarks" })
+vim.keymap.set("n", "<leader>md", require("core.functions").toggle_bookmark_display, { desc = "Toggle bookmark signs" })
+vim.keymap.set("n", "<leader>mD", require("core.functions").delete_all_bookmarks, { desc = "Delete all bookmarks" })
+vim.keymap.set("n", "<leader>mk", require("core.functions").goto_next_bookmark, { desc = "Next bookmark" })
+vim.keymap.set("n", "<leader>mj", require("core.functions").goto_prev_bookmark, { desc = "Previous bookmark" })
 
 -- Toggle
 vim.keymap.set("n", "<leader>tw", require("core.functions").toggle_wrap, { desc = "Toggle wrap" })

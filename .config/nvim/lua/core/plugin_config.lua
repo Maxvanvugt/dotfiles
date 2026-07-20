@@ -7,31 +7,10 @@ require("telescope").setup({
     -- },
 })
 
-require("bookmarks").setup({
-    picker = {
-        picker_backend = "telescope", -- "snacks" (default) or "telescope"
-        entry_display = function(bookmark)
-            return vim.fn.fnamemodify(bookmark.location.path, ":t")
-        end,
-    },
-    signs = {
-        mark = {
-            icon = "",
-        },
-    },
-    treeview = {
-        render_bookmark = function(node)
-            local location = ""
-            if node.location and node.location.path then
-                local filename = vim.fn.fnamemodify(node.location.path, ":t")
-                location = string.format(" │ %s:%d", filename, node.location.line)
-            end
+require("lspmark").setup()
+require("lspmark.bookmarks").load_bookmarks()
 
-            return location
-        end,
-    },
-})
-
+require("telescope").load_extension("lspmark")
 require("dap-view").setup({
     windows = {
         position = "right"
@@ -170,5 +149,12 @@ vim.api.nvim_create_autocmd("FileType", {
                 { path = "${3rd}/luv/library", words = { "vim%.uv" } },
             },
         })
+    end,
+})
+
+vim.api.nvim_create_autocmd("DirChanged", {
+    pattern = "*",
+    callback = function()
+        require("lspmark.bookmarks").load_bookmarks()
     end,
 })

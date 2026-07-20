@@ -90,26 +90,141 @@ function M.make_mark()
 end
 
 function M.toggle_bookmark()
-    local Service = require("bookmarks.domain.service")
-    local Node = require("bookmarks.domain.node")
-    local Sign = require("bookmarks.sign")
+    require("lspmark.bookmarks").toggle_bookmark()
+end
 
-    local existing = Service.find_bookmark_by_location()
-    if existing then
-        Service.toggle_mark("")
-    else
-        local bookmark = Node.new_bookmark("")
-        local content = bookmark.content or ""
-        -- sqlite.lua treats strings like foo(...) as SQL and inlines them unquoted
-        if content:match("^[%S]+%(.*%)$") then
-            content = content .. " "
+function M.toggle_bookmark_display()
+    vim.g.lspmark_signs_visible = not (vim.g.lspmark_signs_visible ~= false)
+    local bookmarks = require("lspmark.bookmarks")
+
+    if vim.g.lspmark_signs_visible then
+        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_name(buf) ~= "" then
+                bookmarks.display_bookmarks(buf)
+            end
         end
-        bookmark.content = content
-        Service.new_bookmark(bookmark)
+        M.notify("Bookmark signs visible", vim.log.levels.INFO)
+        return
     end
 
-    Sign.safe_refresh_signs()
-    pcall(require("bookmarks.tree.operate").refresh)
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_valid(buf) then
+            vim.fn.sign_unplace("lspmark", { buffer = buf })
+        end
+    end
+    M.notify("Bookmark signs hidden", vim.log.levels.INFO)
+end
+
+function M.delete_all_bookmarks()
+    vim.ui.input({ prompt = "Delete all bookmarks? (y/N): " }, function(input)
+        if input ~= "y" and input ~= "Y" then
+            return
+        end
+
+        local bookmarks = require("lspmark.bookmarks")
+        bookmarks.bookmarks = {}
+        bookmarks.save_bookmarks()
+
+        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.api.nvim_buf_is_valid(buf) then
+                vim.fn.sign_unplace("lspmark", { buffer = buf })
+            end
+        end
+
+        M.notify("All bookmarks deleted", vim.log.levels.INFO)
+    end)
+end
+
+local function collect_current_file_bookmarks()
+    local bookmarks = require("lspmark.bookmarks")
+    local utils = require("lspmark.utils")
+    local bufnr = vim.api.nvim_get_current_buf()
+
+    if vim.api.nvim_get_option_value("modified", { buf = bufnr }) then
+        bookmarks.lsp_calibrate_bookmarks(bufnr, false, bookmarks.bookmark_file)
+    end
+
+    local file_name = utils.standarize_path(vim.api.nvim_buf_get_name(bufnr))
+    if file_name == "" or not bookmarks.bookmarks[file_name] then
+        return {}
+    end
+
+    local locations = {}
+    for kind, kind_symbols in pairs(bookmarks.bookmarks[file_name]) do
+        if kind == bookmarks.plain_magic then
+            local marks = kind_symbols[bookmarks.plain_magic] or kind_symbols
+            for _, mark in ipairs(marks) do
+                table.insert(locations, { lnum = mark.line, col = mark.col or 0 })
+            end
+        else
+            for _, name_symbols in pairs(kind_symbols) do
+                for offset, marks in pairs(name_symbols) do
+                    for _, mark in ipairs(marks) do
+                        table.insert(locations, {
+                            lnum = mark.range[1] + tonumber(offset) + 1,
+                            col = mark.col or 0,
+                        })
+                    end
+                end
+            end
+        end
+    end
+
+    table.sort(locations, function(a, b)
+        if a.lnum ~= b.lnum then
+            return a.lnum < b.lnum
+        end
+        return a.col < b.col
+    end)
+
+    return locations
+end
+
+local function goto_bookmark_in_direction(direction)
+    local locations = collect_current_file_bookmarks()
+    if #locations == 0 then
+        M.notify("No bookmarks in this file", vim.log.levels.WARN)
+        return
+    end
+
+    local cur_lnum = vim.api.nvim_win_get_cursor(0)[1]
+    local min_bm = locations[1]
+    local max_bm = locations[#locations]
+    local target
+
+    if direction == "next" then
+        if cur_lnum >= max_bm.lnum then
+            target = min_bm
+        else
+            for _, loc in ipairs(locations) do
+                if loc.lnum > cur_lnum then
+                    target = loc
+                    break
+                end
+            end
+        end
+    elseif cur_lnum <= min_bm.lnum then
+        target = max_bm
+    else
+        for i = #locations, 1, -1 do
+            if locations[i].lnum < cur_lnum then
+                target = locations[i]
+                break
+            end
+        end
+    end
+
+    if target then
+        vim.api.nvim_win_set_cursor(0, { target.lnum, target.col })
+    end
+end
+
+function M.goto_next_bookmark()
+    goto_bookmark_in_direction("next")
+end
+
+function M.goto_prev_bookmark()
+    goto_bookmark_in_direction("prev")
 end
 
 function M.toggle_wrap()
