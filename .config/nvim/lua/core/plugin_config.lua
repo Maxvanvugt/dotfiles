@@ -78,11 +78,18 @@ require("nvim-treesitter").setup({
     },
 })
 
+local gen_loader = require('mini.snippets').gen_loader
+
 require("mini.ai").setup()
 require("mini.surround").setup()
 require("mini.tabline").setup()
 require("mini.diff").setup()
 require("mini.pairs").setup()
+require("mini.snippets").setup({
+    snippets = {
+        gen_loader.from_file('~/.config/nvim/snippets/global.json'),
+    },
+})
 require("mini.files").setup()
 require("mini.bufremove").setup()
 require("mini.completion").setup()
